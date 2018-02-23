@@ -14,7 +14,7 @@ const dbName = 'nutrition';
 //Uses static directory "public"
 app.use(express.static("public"));
 
-app.get("/food/:name", function (req, res){
+app.get("/API/food/:name", function (req, res){
     //TODO: CALL API HERE
     request("https://api.nal.usda.gov/ndb/search/?format=json&q="+req.params.name+"&max=25&offset=0&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
     function (error, response, body){
@@ -22,8 +22,7 @@ app.get("/food/:name", function (req, res){
             console.log(error);
         }
         if (!error && response.statusCode == 200) {
-            console.log(body);
-            res.send(body);
+            res.send(JSON.parse(body));
         }
     })
     //res.send(resultFromApi);
