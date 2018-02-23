@@ -22,9 +22,22 @@ app.get("/API/food/:name", function (req, res){
             console.log(error);
         }
         if (!error && response.statusCode == 200) {
-            res.send(JSON.parse(body));
+            res.send(JSON.parse(body).list.item);
         }
     })
+    //res.send(resultFromApi);
+});
+app.get("/API/food/nutrition/:id", function (req, res){
+    //TODO: CALL API HERE
+    request("https://api.nal.usda.gov/ndb/V2/reports?ndbno="+req.params.id+"&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
+        function (error, response, body){
+            if (error){
+                console.log(error);
+            }
+            if (!error && response.statusCode == 200) {
+                res.send(JSON.parse(body));
+            }
+        })
     //res.send(resultFromApi);
 });
 
