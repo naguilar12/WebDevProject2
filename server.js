@@ -1,6 +1,8 @@
 const express = require("express");
 const MongoClient  = require("mongodb").MongoClient;
 const assert = require('assert');
+var request = require('request');
+
 const app = express();
 
 // Connection URL
@@ -11,8 +13,17 @@ const dbName = 'nutrition';
 
 
 app.get("/food/:name", function (req, res){
-    var name=req.params.name;
     //TODO: CALL API HERE
+    request("https://api.nal.usda.gov/ndb/search/?format=json&q="+req.params.name+"&max=25&offset=0&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
+    function (error, response, body){
+        if (error){
+            console.log(error);
+        }
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+            res.send(body);
+        }
+    })
     //res.send(resultFromApi);
 });
 
@@ -20,7 +31,11 @@ app.post("/myWeight/:userId/:userHash", function (req, res){
     //TODO: search db if user already has a document of weights add value, else create document
 });
 
-// Use connect method to connect to the Server
+app.listen(80, () => {
+    console.log("Listening on :80");
+});
+
+/*/ Use connect method to connect to the Server
 MongoClient.connect(url, function(err, client) {
     assert.equal(null, err);
     console.log("Connected correctly to server");
@@ -41,3 +56,5 @@ MongoClient.connect(url, function(err, client) {
         });
     });
 });
+
+*/
