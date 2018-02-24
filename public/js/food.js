@@ -20,7 +20,7 @@ $(".searchFoodButton").on("click", function(){
     console.log(url);
 
    $.getJSON(url, resultsFromFoodSearch).done(resultsFromFoodSearch).fail(function( jqxhr, textStatus, error ) {
-       var err = textStatus + ", " + error;
+       let err = textStatus + ", " + error;
        console.log( "Request Failed: " + err );
    });
 });
