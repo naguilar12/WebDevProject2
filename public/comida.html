@@ -11,28 +11,58 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
     <!--My style sheet-->
     <link rel="stylesheet" href="/css/myStyle.css">
+    <link rel="stylesheet" href="styles/navbar.css">
 </head>
 <body>
-<nav class="navbar navbar-inverse bg-inverse">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">DietFree</a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="comida.html">Today's challenge</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="">My stats</a>
-            </li>
-        </ul>
+<nav id="sidebar">
+    <!-- Sidebar Header -->
+    <div class="sidebar-logo">
+        <img id="logo" class="img-responsive" src="resources/diet_advisor_logo.png" alt="diet_advisor_logo">
     </div>
+    <div class="sidebar-logo-min">
+        <img id="logo_min" class="img-responsive" src="resources/diet_advisor_logo_min.png" alt="diet_advisor_logo_min">
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                <i class="fa fa-home"></i>
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-briefcase"></i>
+                About
+            </a>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                <i class="fa fa-files-o"></i>
+                Pages
+            </a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-chain"></i>
+                Portfolio
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-envelope"></i>
+                Contact
+            </a>
+        </li>
+    </ul>
 </nav>
 <div class="container-fluid">
     <h1 class="d-flex justify-content-center">Let's see today's challenge!</h1>
@@ -70,6 +100,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!--My scripts-->
 <script src="/js/food.js"></script>
+<script src="js/navbar.js"></script>
 
 </body>
 </html>
