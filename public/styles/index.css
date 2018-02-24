@@ -40,9 +40,18 @@
     padding: 5%;
 }
 
+#logo:hover{
+    cursor: pointer;
+}
+
 #logo_min{
     height: 100%;
     width: 100%;
+    padding: 5%;
+}
+
+#logo_min:hover{
+    cursor: pointer;
 }
 
 #sidebar ul li a {
