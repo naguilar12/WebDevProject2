@@ -48,7 +48,7 @@ app.post("/myWeight/:userId/:userHash", function (req, res){
 });
 
 
-app.listen(80, () => {
+app.listen(process.env.PORT || 80, () => {
     console.log("Listening on :80");
 });
 
