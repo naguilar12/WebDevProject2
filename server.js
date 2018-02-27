@@ -1,12 +1,13 @@
 const express = require("express");
 const MongoClient  = require("mongodb").MongoClient;
-const assert = require('assert');
-var request = require('request');
+const test = require('assert');
+const request = require('request');
+const insert = require("CRUD.js");
 
 const app = express();
 
 // Connection URL
-const dBurl = 'mongodb://localhost:27017';
+const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
 
 // Database Name
 const dbName = 'nutrition';
@@ -53,8 +54,25 @@ app.get("/API/food/nutrition/:id", function (req, res){
 
 });
 
-app.post("/myWeight/:userId/:userHash", function (req, res){
+app.post("/API/myWeight/:userId/:value", function (req, res){
     //TODO: search db if user already has a document of weights add value, else create document
+});
+
+app.get("/API/myWeight/:userId", function (req, res){
+    //TODO: search db if user already has a document of weights add value
+});
+
+app.get("/API/myChallenge/:userId", function (req, res){
+    //TODO: search db if user already has a document of challenge add value
+});
+app.post("/API/myChallenge/:userId", function (req, res){
+    //TODO: search db if user already has a document of challenge add value
+});
+app.get("/API/myConsumption/:userId", function (req, res){
+    //TODO: search db if user already has a document of consumption add value
+});
+app.post("/API/myConsumption/:userId", function (req, res){
+    //TODO: search db if user already has a document of consumption add value
 });
 
 
@@ -62,6 +80,11 @@ app.listen(process.env.PORT || 80, () => {
     console.log("Listening on :80");
 });
 
+
+MongoClient.connect(DBurl, function(err, db) {
+    test.equal(null, err);
+    console.log("success");
+});
 /*/ Use connect method to connect to the Server
 
 MongoClient.connect(url, function(err, client) {
