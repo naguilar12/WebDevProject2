@@ -37,7 +37,16 @@ app.get("/API/food/nutrition/:id", function (req, res){
                 console.log(error);
             }
             if (!error && response.statusCode == 200) {
-                res.send(JSON.parse(body));
+                let food=JSON.parse(body).foods[0];
+                item={
+                    name:food.name,
+                    kcals: food.nutrients[1].value,
+                    protein: food.nutrients[3].value,
+                    fat: food.nutrients[4].value,
+                    carbohydrates: food.nutrients[6].value,
+                    fiber : food.nutrients[7].value
+                };
+                res.send(item);
             }
         })
     //res.send(resultFromApi);

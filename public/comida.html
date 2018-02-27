@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="styles/navbar.css">
 </head>
 <body>
-<nav id="sidebar">
+<div class="row">
+<nav id="sidebar" class="col-3" >
     <!-- Sidebar Header -->
     <div class="sidebar-logo">
         <img id="logo" class="img-responsive" src="resources/diet_advisor_logo.png" alt="diet_advisor_logo">
@@ -64,7 +65,7 @@
         </li>
     </ul>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid col-9">
     <h1 class="d-flex justify-content-center">Let's see today's challenge!</h1>
     <div class="container-fluid remainingVals">
         <div class="progress kcals">
@@ -84,14 +85,15 @@
         </div>
     </div>
     <div class="container fluid">
-    <form>
+    <form onSubmit="return false;">
         <input type="text" class="foodSearchInput"\>
-        <input type="submit" value="Search" class="searchFoodButton"\>
+        <button class="searchFoodButton" >Search</button>
     </form>
     </div>
     <div class="foodItem container-fluid">
 
     </div>
+</div>
 </div>
 
 <!-- bootsrap scripts and jquery -->

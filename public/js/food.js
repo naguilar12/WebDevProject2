@@ -1,43 +1,37 @@
 "use strict";
 
 function resultsFromFoodSearch(data){
-    console.log("called callback");
-    let container = $(".foodItem container-fluid");
-    data.foreach(function (d){
-    container.append($("<div class=\"card\">")
+    let container = $(".foodItem, container-fluid");
+    container.empty();
+    data.forEach(function (d){
+    let card=$("<div class=\"card\">")
         .append($("<div class=\"card-body\">")
         .append($("<h5>")
             .text(d.name)))
-        .attr("id", d.ndbno));
+        .attr("id", d.ndbno);
+        container.append(card);
+        card.on("click", function(){
+            let url="http://localhost:80/API/food/nutrition/"+d.ndbno;
+            console.log(url);
+            $.getJSON(url, detailedResult);
+        });
     });
-    console.log(data);
+}
+
+function detailedResult(food){
+    let container = $(".foodItem, container-fluid");
+    container.empty();
+    console.log(food);
+    container.append($("<div class=\"card\">")
+        .append($("<div class=\"card-body\">")
+            .append($("<h5>")
+                .text(d.name))
+            .append($("<p>"))));
+
 }
 $(".searchFoodButton").on("click", function(){
-    console.log("clicked")
     let input = $(".foodSearchInput").val();
-    console.log(input);
     let url="http://localhost:80/API/food/"+input;
-    console.log(url);
-
-   $.getJSON(url, resultsFromFoodSearch).done(resultsFromFoodSearch).fail(function( jqxhr, textStatus, error ) {
-       let err = textStatus + ", " + error;
-       console.log( "Request Failed: " + err );
+    $.getJSON(url, resultsFromFoodSearch);
    });
-});
-
-/* $.ajax({
-     dataType: 'json',
-     url: url,
-     error: function(obj, str, error){
-
-         console.log("An error occured");
-         console.log(obj);
-         console.log(str);
-         console.log(error);
-     },
-     success: resultsFromFoodSearch
- }); */
-
-//$.getJSON("https://api.nal.usda.gov/ndb/V2/reports?ndbno=45014897&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",resultsFromFoodSearch);
-
 
