@@ -14,7 +14,16 @@ nav{
 .nav-item:hover{
     background-color: rgb(207,164,60);
     transition: background-color 0.5s ease;
-    color: white;
+}
+
+.nav-item:focus{
+    background-color: rgb(207,164,60);
+    transition: background-color 0.5s ease;
+}
+
+.active-item{
+    background-color: rgb(207,164,60);
+    transition: background-color 0.5s ease;
 }
 
 .nav-link{
@@ -25,6 +34,16 @@ nav{
 }
 
 .nav-link:hover{
+    color: white;
+    transition: color 0.5s ease;
+}
+
+.nav-link:focus{
+    color: white;
+    transition: color 0.5s ease;
+}
+
+.active-link{
     color: white;
     transition: color 0.5s ease;
 }
