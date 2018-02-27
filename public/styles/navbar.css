@@ -7,9 +7,8 @@ nav{
     background-color: rgba(0,0,0,0);
     transition: background-color 0.5s ease;
     text-align: center;
-    margin-right: 2vw;
     border-right: 10vw;
-    width: 5vw;
+    width: 10vw;
 }
 
 .nav-item:hover{
