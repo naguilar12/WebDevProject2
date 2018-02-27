@@ -4,68 +4,63 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta description="Here you add food to meet your calorical daily challenge "/>
+    <meta author="Juan Manuel Lovera and Tomas Felipe Venegas">
+    <title>DietAdvisor</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee" rel="stylesheet">
 
     <!-- Local CSS -->
     <link rel="stylesheet" href="styles/navbar.css">
-
-    <title>DietAdvisor</title>
 </head>
 <body>
-<div class="wrapper">
 
-    <nav id="sidebar">
-        <!-- Sidebar Header -->
-        <div class="sidebar-logo">
-            <img id="logo" class="img-responsive" src="resources/diet_advisor_logo.png" alt="diet_advisor_logo">
-        </div>
-        <div class="sidebar-logo-min">
-            <img id="logo_min" class="img-responsive" src="resources/diet_advisor_logo_min.png" alt="diet_advisor_logo_min">
-        </div>
+<!-- App Navbar -->
+<nav class="navbar navbar-toggleable-md">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><img class="img-responsive" id="navbar_logo" src="resources/diet_advisor_logo.png" alt="diet_advisor_logo"></a>
 
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-home"></i>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-home"></i><br>
                     Home
+                    <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-briefcase"></i>
-                    About
-                </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
-                    <i class="fa fa-files-o"></i>
-                    Pages
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-chain"></i>
-                    Portfolio
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-line-chart"></i><br>
+                    My Stats
                 </a>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-envelope"></i>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-cutlery"></i><br>
+                    Challenge
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-phone"></i><br>
                     Contact
                 </a>
             </li>
         </ul>
-    </nav>
+    </div>
+</nav>
 
-</div>
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
