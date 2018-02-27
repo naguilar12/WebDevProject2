@@ -2,7 +2,7 @@ const express = require("express");
 const MongoClient  = require("mongodb").MongoClient;
 const test = require('assert');
 const request = require('request');
-const insert = require("CRUD.js");
+const insert = require("CRUD");
 
 const app = express();
 

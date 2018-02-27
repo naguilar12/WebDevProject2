@@ -1,4 +1,4 @@
-let insertWeight = function (db, callback, userId, weight) {
+exports.insertWeight = function (db, callback, userId, weight) {
     // Get the documents collection
     let collection = db.collection('weights');
 
@@ -22,7 +22,7 @@ let insertWeight = function (db, callback, userId, weight) {
 
     });
 };
-let insertChallenge = function (db, callback, userId, challenge) {
+exports.insertChallenge = function (db, callback, userId, challenge) {
     // Get the documents collection
     let collection = db.collection('challenges');
     // Insert some documents
@@ -46,7 +46,7 @@ let insertChallenge = function (db, callback, userId, challenge) {
 
     });
 };
-let insertConsumption = function (db, callback, userId, consumption) {
+exports.insertConsumption = function (db, callback, userId, consumption) {
     // Get the documents collection
     let collection = db.collection('consumptions');
     // Insert some documents
@@ -71,7 +71,7 @@ let insertConsumption = function (db, callback, userId, consumption) {
     });
 };
 
-let indexCollections = function (db, callback) {
+exports.indexCollections = function (db, callback) {
     db.collection('weights').createIndex(
         {"userId": 1},
         null,
@@ -98,7 +98,7 @@ let indexCollections = function (db, callback) {
     );
 };
 
-let getWights = function (db, callback, userId) {
+exports.getWights = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('weights');
 
@@ -109,7 +109,7 @@ let getWights = function (db, callback, userId) {
         callback(docs);
     });
 };
-let getChallenges = function (db, callback, userId) {
+exports.getChallenges = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('challenges');
 
@@ -120,7 +120,7 @@ let getChallenges = function (db, callback, userId) {
         callback(docs);
     });
 };
-let getConsumptions = function (db, callback, userId) {
+exports.getConsumptions = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('consumptions');
 
@@ -131,7 +131,7 @@ let getConsumptions = function (db, callback, userId) {
         callback(docs);
     });
 };
-let getLastWeight = function (db, callback, userId) {
+exports.getLastWeight = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('weights');
 
@@ -144,7 +144,7 @@ let getLastWeight = function (db, callback, userId) {
         callback(w);
     });
 };
-let getLastChallenge = function (db, callback, userId) {
+exports.getLastChallenge = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('challenges');
 
@@ -157,7 +157,7 @@ let getLastChallenge = function (db, callback, userId) {
         callback(w);
     });
 };
-let getLastConsumption = function (db, callback, userId) {
+exports.getLastConsumption = function (db, callback, userId) {
     // Get the documents collection
     let collection = db.collection('consumptions');
 
