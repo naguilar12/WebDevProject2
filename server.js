@@ -6,7 +6,7 @@ var request = require('request');
 const app = express();
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const dBurl = 'mongodb://localhost:27017';
 
 // Database Name
 const dbName = 'nutrition';
@@ -17,7 +17,7 @@ app.use(express.static("public"));
 app.get("/",(req,res) => res.sendfile("public","index.html"));
 
 app.get("/API/food/:name", function (req, res){
-    //TODO: CALL API HERE
+    // CALL API HERE
     request("https://api.nal.usda.gov/ndb/search/?format=json&q="+req.params.name+"&max=25&offset=0&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
     function (error, response, body){
         if (error){
@@ -27,19 +27,20 @@ app.get("/API/food/:name", function (req, res){
             res.send(JSON.parse(body).list.item);
         }
     })
-    //res.send(resultFromApi);
 });
 app.get("/API/food/nutrition/:id", function (req, res){
-    //TODO: CALL API HERE
-    request("https://api.nal.usda.gov/ndb/V2/reports?ndbno="+req.params.id+"&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
+    // CALL API HERE
+    let url="https://api.nal.usda.gov/ndb/V2/reports?ndbno="+req.params.id+"&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3";
+    request(url,
         function (error, response, body){
             if (error){
                 console.log(error);
             }
             if (!error && response.statusCode == 200) {
-                let food=JSON.parse(body).foods[0];
+                let food=JSON.parse(body).foods[0].food;
+
                 item={
-                    name:food.name,
+                    name:food.desc.name,
                     kcals: food.nutrients[1].value,
                     protein: food.nutrients[3].value,
                     fat: food.nutrients[4].value,
@@ -49,7 +50,7 @@ app.get("/API/food/nutrition/:id", function (req, res){
                 res.send(item);
             }
         })
-    //res.send(resultFromApi);
+
 });
 
 app.post("/myWeight/:userId/:userHash", function (req, res){
