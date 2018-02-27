@@ -7,11 +7,11 @@ function resultsFromFoodSearch(data){
     let card=$("<div class=\"card\">")
         .append($("<div class=\"card-body\">")
         .append($("<h5>")
-            .text(d.name)))
+            .text(d.name.toLowerCase())))
         .attr("id", d.ndbno);
         container.append(card);
         card.on("click", function(){
-            let url="http://localhost:80/API/food/nutrition/"+d.ndbno;
+            let url="http://localhost/API/food/nutrition/"+d.ndbno;
             console.log(url);
             $.getJSON(url, detailedResult);
         });
@@ -25,8 +25,27 @@ function detailedResult(food){
     container.append($("<div class=\"card\">")
         .append($("<div class=\"card-body\">")
             .append($("<h5>")
-                .text(d.name))
-            .append($("<p>"))));
+                .text(food.name.toLowerCase()))
+            .append($("<p>")
+                .text("Portion: 100g"))
+            .append($("<div class='row'>")
+                .append($("<div class='col-2'>")
+                    .text("Protein: "+food.protein))
+                .append($("<div class='col-3'>")
+                    .text("Carbohydrates: "+food.carbohydrates))
+                .append($("<div class='col-2'>")
+                    .text("Fat: "+food.fat))
+                .append($("<div class='col-2'>")
+                    .text("Fiber: "+food.fiber))
+                .append($("<div class='col-3'>")
+                    .text("Energy: "+food.kcals+" Kcals")))
+            .append($("<div class='row'>")
+                .append($("<p class='col-5'>")
+                    .text("Number of portions taken"))
+                .append($("<input type='text' value='1' class='col-2'>"))
+                .append($("<span class='col-1'>"))
+                .append($("<button id='portionsTakenBut' class=\"btn btn-primary col-4\">")
+                    .text("Submit")))));
 
 }
 $(".searchFoodButton").on("click", function(){
