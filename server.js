@@ -5,6 +5,8 @@ const request = require('request');
 const CRUD = require("./CRUD");
 
 const app = express();
+const bodyParser = require('body-parser');
+
 
 // Connection URL
 const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
@@ -14,8 +16,12 @@ const dbName = 'nutrition';
 
 //Uses static directory "public"
 app.use(express.static("public"));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.sendfile("public", "index.html"));
+
+
 
 app.get("/API/food/:name", function (req, res) {
     // CALL API HERE
@@ -56,27 +62,19 @@ app.get("/API/food/nutrition/:id", function (req, res) {
 
 app.post("/API/myWeight/:userId/:value", function (req, res) {
     //TODO: search db if user already has a document of weights add value, else create document
-    if (Number(req.params.userId) !== req.params.userId || Number(req.params.value) !== req.params.value) {
-        res.send([]);
-        console.log("wrong formulated API petition");
-        return;
-    }
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
         CRUD.insertWeight(db, function (weights) {
             db.close();
             res.send(weights);
-        }, req.params.userId, req.params.value);
+        }, Number(req.params.userId), Number(req.params.value));
     });
 });
 
 app.get("/API/myWeight/:userId", function (req, res) {
     // search db if user already has a document of weights add value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send([]);
-        return;
-    }
+
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
@@ -90,10 +88,7 @@ app.get("/API/myWeight/:userId", function (req, res) {
 
 app.get("/API/myChallenge/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send([]);
-        return;
-    }
+
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
@@ -106,27 +101,20 @@ app.get("/API/myChallenge/:userId", function (req, res) {
 });
 app.post("/API/myChallenge/:userId", function (req, res) {
     // search db if user already has a document of challenge add value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send([]);
-        console.log("wrong formulated API petition");
-        return;
-    }
 
+    console.log(req.body.kcals);
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
         CRUD.insertChallenge(db, function (weights) {
             db.close();
             res.send(weights);
-        }, req.params.userId, req.body);
+        }, Number(req.params.userId), req.body);
     });
 });
 app.get("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send([]);
-        return;
-    }
+
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
@@ -151,7 +139,7 @@ app.post("/API/myConsumption/:userId", function (req, res) {
         CRUD.insertChallenge(db, function (weights) {
             db.close();
             res.send(weights);
-        }, req.params.userId, req.body);
+        }, Number(req.params.userId), req.body);
     });
 });
 
