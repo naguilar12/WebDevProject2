@@ -27,7 +27,7 @@ Banner styles
 
 .banner-content{
     height: 100vh;
-    background-color: rgba(90,90,90,0.7);
+    background-color: rgba(70,70,70,0.7);
 }
 
 .banner-content h1{
@@ -51,12 +51,29 @@ About styles
  -------------*/
 
 .about{
-
+    background: rgb(207,164,60);
+    height: 100vh;
 }
 
 .about-content{
-
+    height: 100vh;
 }
+
+.about-content h1{
+    font-family: 'Satisfy', cursive;
+    font-size: 10vh;
+    color: white;
+}
+
+.about-content p{
+    font-family: 'Neuton', cursive;
+    font-size: 5vh;
+    color: rgb(70,70,70);
+}
+
+/*------------
+Content Adjustment Styles
+ ------------*/
 
 @media (max-width: 768px) {
     .banner-content h1{
@@ -73,5 +90,25 @@ About styles
 
     .start-button{
         font-family: 'Mukta Mahee', sans-serif;
+    }
+
+    .about{
+        background: rgb(207,164,60);
+    }
+
+    .about-content{
+
+    }
+
+    .about-content h1{
+        font-family: 'Satisfy', cursive;
+        font-size: 7vh;
+        color: white;
+    }
+
+    .about-content p{
+        font-family: 'Neuton', cursive;
+        font-size: 4vh;
+        color: rgb(70,70,70);
     }
 }
