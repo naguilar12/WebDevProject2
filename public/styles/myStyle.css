@@ -2,11 +2,14 @@
     text-align: center;
     margin: auto;
     position: center;
-
 }
 
 #challenge-today{
-    height: 100%;
+    height: 100vh;
+}
+
+.challenge-items{
+    height: 100vh;
 }
 
 .progress{
