@@ -1,8 +1,8 @@
 const express = require("express");
 const MongoClient  = require("mongodb").MongoClient;
-const test = require('assert');
+const assert = require('assert');
 const request = require('request');
-const insert = require("CRUD");
+const CRUD = require("./CRUD");
 
 const app = express();
 
@@ -56,10 +56,27 @@ app.get("/API/food/nutrition/:id", function (req, res){
 
 app.post("/API/myWeight/:userId/:value", function (req, res){
     //TODO: search db if user already has a document of weights add value, else create document
+    MongoClient.connect(DBurl, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        CRUD.insertWeight(db, function(weights) {
+            db.close();
+            res.send(weights);
+        }, req.params.userId, req.params.value);
+    });
 });
 
 app.get("/API/myWeight/:userId", function (req, res){
-    //TODO: search db if user already has a document of weights add value
+    // search db if user already has a document of weights add value
+    MongoClient.connect(DBurl, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        CRUD.getWeights(db, function(weights) {
+            db.close();
+            res.send(weights);
+        }, req.params.userId);
+    });
 });
 
 app.get("/API/myChallenge/:userId", function (req, res){
@@ -82,31 +99,6 @@ app.listen(process.env.PORT || 80, () => {
 
 
 MongoClient.connect(DBurl, function(err, db) {
-    test.equal(null, err);
+    assert.equal(null, err);
     console.log("success");
 });
-/*/ Use connect method to connect to the Server
-
-MongoClient.connect(url, function(err, client) {
-    assert.equal(null, err);
-    console.log("Connected correctly to server");
-
-    const db = client.db(dbName);
-
-    // Insert a single document
-    db.collection('inserts').insertOne({a:1}, function(err, r) {
-        assert.equal(null, err);
-        assert.equal(1, r.insertedCount);
-
-        // Insert multiple documents
-        db.collection('inserts').insertMany([{a:2}, {a:3}], function(err, r) {
-            assert.equal(null, err);
-            assert.equal(2, r.insertedCount);
-
-            client.close();
-        });
-    });
-
-});
-
-*/
