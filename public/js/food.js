@@ -1,4 +1,5 @@
 "use strict";
+let root="http://localhost";
 
 function resultsFromFoodSearch(data){
     let container = $(".foodItem, container-fluid");
@@ -11,7 +12,7 @@ function resultsFromFoodSearch(data){
         .attr("id", d.ndbno);
         container.append(card);
         card.on("click", function(){
-            let url="http://localhost/API/food/nutrition/"+d.ndbno;
+            let url=root+"/API/food/nutrition/"+d.ndbno;
             console.log(url);
             $.getJSON(url, detailedResult);
         });
@@ -50,11 +51,14 @@ function detailedResult(food){
 }
 $(".searchFoodButton").on("click", function(){
     let input = $(".foodSearchInput").val();
-    let url="http://localhost:80/API/food/"+input;
+    let url=root+"/API/food/"+input;
     $.getJSON(url, resultsFromFoodSearch);
    });
 
 $(".submitWeight").on("click", function(){
    console.log("clicker weight");
+   let temporalId=1;
+   let url= root+"/API/myWeight/"+temporalId+"/"+$("#weight").value;
+   console.log(url);
    
 });
