@@ -1,25 +1,26 @@
+/*global $*/
 "use strict";
-let root="http://localhost";
+let root = "http://localhost";
 
-function resultsFromFoodSearch(data){
+function resultsFromFoodSearch(data) {
     let container = $(".foodItem, container-fluid");
     container.empty();
-    data.forEach(function (d){
-    let card=$("<div class=\"card\">")
-        .append($("<div class=\"card-body\">")
-        .append($("<h5>")
-            .text(d.name.toLowerCase())))
-        .attr("id", d.ndbno);
+    data.forEach(function (d) {
+        let card = $("<div class=\"card\">")
+            .append($("<div class=\"card-body\">")
+                .append($("<h5>")
+                    .text(d.name.toLowerCase())))
+            .attr("id", d.ndbno);
         container.append(card);
-        card.on("click", function(){
-            let url=root+"/API/food/nutrition/"+d.ndbno;
+        card.on("click", function () {
+            let url = root + "/API/food/nutrition/" + d.ndbno;
             console.log(url);
             $.getJSON(url, detailedResult);
         });
     });
 }
 
-function detailedResult(food){
+function detailedResult(food) {
     let container = $(".foodItem, container-fluid");
     container.empty();
     console.log(food);
@@ -31,15 +32,15 @@ function detailedResult(food){
                 .text("Portion: 100g"))
             .append($("<div class='row'>")
                 .append($("<div class='col-2'>")
-                    .text("Protein: "+food.protein))
+                    .text("Protein: " + food.protein))
                 .append($("<div class='col-3'>")
-                    .text("Carbohydrates: "+food.carbohydrates))
+                    .text("Carbohydrates: " + food.carbohydrates))
                 .append($("<div class='col-2'>")
-                    .text("Fat: "+food.fat))
+                    .text("Fat: " + food.fat))
                 .append($("<div class='col-2'>")
-                    .text("Fiber: "+food.fiber))
+                    .text("Fiber: " + food.fiber))
                 .append($("<div class='col-3'>")
-                    .text("Energy: "+food.kcals+" Kcals")))
+                    .text("Energy: " + food.kcals + " Kcals")))
             .append($("<div class='row'>")
                 .append($("<p class='col-5'>")
                     .text("Number of portions taken"))
@@ -49,26 +50,27 @@ function detailedResult(food){
                     .text("Submit")))));
 
 }
-$(".searchFoodButton").on("click", function(){
-    let input = $(".foodSearchInput").val();
-    let url=root+"/API/food/"+input;
-    $.getJSON(url, resultsFromFoodSearch);
-   });
 
-$(".submitWeight").on("click", function(){
-   console.log("clicker weight");
-   let temporalId=1;
-   let input = $("#weight");
-   console.log(input);
-   let url= root+"/API/myWeight/"+temporalId+"/"+input.val();
-   console.log(url);
-   $.post(url, function(data){
-       console.log("Weight added correctly.");
-    })
-   
+$(".searchFoodButton").on("click", function () {
+    let input = $(".foodSearchInput").val();
+    let url = root + "/API/food/" + input;
+    $.getJSON(url, resultsFromFoodSearch);
 });
 
-function main(){
+$(".submitWeight").on("click", function () {
+    console.log("clicker weight");
+    let temporalId = 1;
+    let input = $("#weight");
+    console.log(input);
+    let url = root + "/API/myWeight/" + temporalId + "/" + input.val();
+    console.log(url);
+    $.post(url, function (data) {
+        console.log("Weight added correctly.");
+    })
+
+});
+
+function main() {
     $("#challenge-option").click();
     $("#challenge-link").click();
 }
