@@ -28,7 +28,7 @@
 <body>
 
 <!-- App Navbar -->
-<nav class="navbar navbar-toggleable-md fixed-top">
+<nav class="navbar navbar-inverse navbar-toggleable-md fixed-top">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -67,6 +67,13 @@
     </div>
 </nav>
 
+<!-- Weight Chart -->
+<div class="container-fluid">
+    <div class="row">
+        <canvas id="weight-chart" class="col"></canvas>
+    </div>
+</div>
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -84,6 +91,8 @@
 <script>
     new WOW().init();
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 
 <!-- Local Scripts -->
 <script src="js/navbar.js"></script>
