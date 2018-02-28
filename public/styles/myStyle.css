@@ -1,8 +1,7 @@
 .progress{
     padding: 1%;
 }
-.foodSearchInput{
-    width:89%;
+width:89%;
 }
 .label-progress{
     width:20%
@@ -15,4 +14,4 @@
 card{
     margin:2%;
     padding:2%;
-}
+}.foodSearchInput{

@@ -54,3 +54,7 @@ $(".searchFoodButton").on("click", function(){
     $.getJSON(url, resultsFromFoodSearch);
    });
 
+$(".submitWeight").on("click", function(){
+   console.log("clicker weight");
+   
+});

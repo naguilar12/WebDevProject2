@@ -9,8 +9,8 @@ exports.insertWeight = function (db, callback, userId, weight) {
             console.log("Found the following records");
             console.log(docs);
             let weights = [];
-            if (docs) {
-                weights=docs[0].weights;
+            if (docs && docs.length>0) {
+                weights = docs[0].weights;
             }
 
             weights.push(weight);
@@ -24,25 +24,24 @@ exports.insertWeight = function (db, callback, userId, weight) {
                 });
         });
     }
-        catch(err){
-            dbase.createCollection('weights',{ size: 2148 });
-            collection = dbase.collection('weights');
-            console.log(collection);
-            collection.updateOne({userId: userId}
-                , {$set: {weights: [weight]}}, {upsert: true},
-                function (err, result) {
-                    assert.equal(err, null);
-                    assert.equal(1, result.result.n);
-                    console.log("Added weight");
-                    callback(result);
-                });
-        }
-
+    catch (err) {
+        dbase.createCollection('weights', {size: 2148});
+        collection = dbase.collection('weights');
+        console.log(collection);
+        collection.updateOne({userId: userId}
+            , {$set: {weights: [weight]}}, {upsert: true},
+            function (err, result) {
+                assert.equal(err, null);
+                assert.equal(1, result.result.n);
+                console.log("Added weight");
+                callback(result);
+            });
+    }
 };
 exports.insertChallenge = function (db, callback, userId, challenge) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
-    let collection = dbase.collection("challenge");
+    let collection = dbase.collection("challenges");
     try {
         collection.find({'userId': userId}).toArray(function (err, docs) {
             assert.equal(err, null);
@@ -56,27 +55,28 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
                 newChallenge.protein = challenge.protein;
                 newChallenge.fat = challenge.fiber;
                 newChallenge.fiber = challenge.fiber;
+                if (docs &&docs.length>0) {
+                    challenges = docs[0].challenges;
+                }
+
+                challenges.push(newChallenge);
+                collection.updateOne({userId: userId}
+                    , {$set: {challenges: challenges}}, {upsert: true},
+                    function (err, result) {
+                        assert.equal(err, null);
+                        assert.equal(1, result.result.n);
+                        console.log("Added challenge");
+                        callback(result);
+                    });
             }
-            catch(err){
+            catch (err) {
                 callback(err);
             }
 
-            if (docs) {
-                challenges=docs[0].challenges;
-            }
 
-            challenges.push(newChallenge);
-            collection.updateOne({userId: userId}
-                , {$set: {challenges: challenges}}, {upsert: true},
-                function (err, result) {
-                    assert.equal(err, null);
-                    assert.equal(1, result.result.n);
-                    console.log("Added challenge");
-                    callback(result);
-                });
         });
     }
-    catch(err){
+    catch (err) {
         try {
             let newChallenge = {};
             newChallenge.kcals = challenge.kcals;
@@ -84,28 +84,30 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             newChallenge.protein = challenge.protein;
             newChallenge.fat = challenge.fiber;
             newChallenge.fiber = challenge.fiber;
+            dbase.createCollection('challenges', {size: 2148});
+            collection = dbase.collection('challenges');
+            console.log(collection);
+            collection.updateOne({userId: userId}
+                , {$set: {challenges: [challenge]}}, {upsert: true},
+                function (err, result) {
+                    assert.equal(err, null);
+                    assert.equal(1, result.result.n);
+                    console.log("Added challenge");
+                    callback(result);
+                });
         }
-        catch(err){
+        catch (err) {
             callback(err);
+
         }
-        dbase.createCollection('challenges',{ size: 2148 });
-        collection = dbase.collection('challenges');
-        console.log(collection);
-        collection.updateOne({userId: userId}
-            , {$set: {challenges: [challenge]}}, {upsert: true},
-            function (err, result) {
-                assert.equal(err, null);
-                assert.equal(1, result.result.n);
-                console.log("Added challenge");
-                callback(result);
-            });
+
     }
 
 };
 exports.insertConsumption = function (db, callback, userId, consumption) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
-    let collection = dbase.collection("consumption");
+    let collection = dbase.collection("consumptions");
     try {
         collection.find({'userId': userId}).toArray(function (err, docs) {
             assert.equal(err, null);
@@ -119,27 +121,29 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
                 newconsumption.protein = consumption.protein;
                 newconsumption.fat = consumption.fiber;
                 newconsumption.fiber = consumption.fiber;
+                if (docs  &&docs.length>0) {
+                    consumptions = docs[0].consumptions;
+                }
+
+                consumptions.push(newconsumption);
+                collection.updateOne({userId: userId}
+                    , {$set: {consumptions: consumptions}}, {upsert: true},
+                    function (err, result) {
+                        assert.equal(err, null);
+                        assert.equal(1, result.result.n);
+                        console.log("Added consumption");
+                        callback(result);
+                    });
             }
-            catch(err){
+            catch (err) {
                 callback(err);
+                return;
             }
 
-            if (docs) {
-                consumptions=docs[0].consumptions;
-            }
 
-            consumptions.push(newconsumption);
-            collection.updateOne({userId: userId}
-                , {$set: {consumptions: consumptions}}, {upsert: true},
-                function (err, result) {
-                    assert.equal(err, null);
-                    assert.equal(1, result.result.n);
-                    console.log("Added consumption");
-                    callback(result);
-                });
         });
     }
-    catch(err){
+    catch (err) {
         try {
             let newconsumption = {};
             newconsumption.kcals = consumption.kcals;
@@ -147,21 +151,22 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
             newconsumption.protein = consumption.protein;
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
+            dbase.createCollection('consumptions', {size: 2148});
+            collection = dbase.collection('consumptions');
+            console.log(collection);
+            collection.updateOne({userId: userId}
+                , {$set: {consumptions: [consumption]}}, {upsert: true},
+                function (err, result) {
+                    assert.equal(err, null);
+                    assert.equal(1, result.result.n);
+                    console.log("Added consumption");
+                    callback(result);
+                });
         }
-        catch(err){
+        catch (err) {
             callback(err);
         }
-        dbase.createCollection('consumptions',{ size: 2148 });
-        collection = dbase.collection('consumptions');
-        console.log(collection);
-        collection.updateOne({userId: userId}
-            , {$set: {consumptions: [consumption]}}, {upsert: true},
-            function (err, result) {
-                assert.equal(err, null);
-                assert.equal(1, result.result.n);
-                console.log("Added consumption");
-                callback(result);
-            });
+
     }
 
 };
@@ -243,9 +248,17 @@ exports.getLastWeight = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        let weights = docs['weights'];
-        let w = weights[weights.length - 1];
-        callback(w);
+        if (docs && docs.length>0) {
+            let weights = docs[0].weights;
+            if (weights && weights.length > 0) {
+                let w = weights[weights.length - 1];
+                callback(w);
+            } else {
+                callback(null);
+            }
+        }else{
+            callback(null);
+        }
     });
 };
 exports.getLastChallenge = function (db, callback, userId) {
@@ -258,9 +271,20 @@ exports.getLastChallenge = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        let challenges = docs['challenges'];
-        let w = challenges[challenges.length - 1];
-        callback(w);
+        if (docs && docs.length>0) {
+            let challenges = docs[0].challenges;
+            console.log(challenges);
+            if (challenges && challenges.length > 0) {
+                let w = challenges[challenges.length - 1];
+                console.log("w: " + w);
+                callback(w);
+            } else {
+                callback(null);
+            }
+        }else{
+            callback(null);
+        }
+
     });
 };
 exports.getLastConsumption = function (db, callback, userId) {
@@ -273,8 +297,16 @@ exports.getLastConsumption = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        let consumptions = docs['consumptions'];
-        let w = consumptions[consumptions.length - 1];
-        callback(w);
+        if (docs && docs.length>0) {
+            let consumptions = docs[0].consumptions;
+            if (consumptions && consumptions.length > 0) {
+                let w = consumptions[consumptions.length - 1];
+                callback(w);
+            } else {
+                callback(null);
+            }
+        }else{
+            callback(null);
+        }
     });
 };
