@@ -58,8 +58,13 @@ $(".searchFoodButton").on("click", function(){
 $(".submitWeight").on("click", function(){
    console.log("clicker weight");
    let temporalId=1;
-   let url= root+"/API/myWeight/"+temporalId+"/"+$("#weight").value;
+   let input = $("#weight");
+   console.log(input);
+   let url= root+"/API/myWeight/"+temporalId+"/"+input.val();
    console.log(url);
+   $.post(url, function(data){
+       console.log("Weight added correctly.");
+    })
    
 });
 
