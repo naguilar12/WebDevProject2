@@ -100,6 +100,7 @@ Content Adjustment Styles
 
     .about-content{
         border-top: solid rgba(0,0,0,0) 5vh;
+        border-bottom: solid rgba(0,0,0,0) 5vh;
     }
 
     .about-content h1{
