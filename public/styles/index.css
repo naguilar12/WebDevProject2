@@ -52,6 +52,7 @@ About styles
 
 .about{
     background: rgb(207,164,60);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
     height: 100vh;
 }
 
@@ -94,10 +95,12 @@ Content Adjustment Styles
 
     .about{
         background: rgb(207,164,60);
+        background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
     }
 
     .about-content{
-
+        border-top: solid rgba(0,0,0,0) 5vh;
+        border-bottom: solid rgba(0,0,0,0) 5vh;
     }
 
     .about-content h1{
