@@ -64,35 +64,67 @@
     </div>
 </nav>
 <div class="row">
-<div class="container-fluid col-9">
-    <h1 class="d-flex justify-content-center">Let's see today's challenge!</h1>
-    <div class="container-fluid remainingVals">
-        <div class="progress kcals">
-           <span class="label-progress">Total Energy  </span> <div class="progress-bar" style="width:80%">3000 Kcals</div>
+    <div class="container-fluid col-9">
+        <h1 class="d-flex justify-content-center">Let's see today's challenge!</h1>
+        <div class="container-fluid remainingVals">
+            <div class="progress kcals">
+               <span class="label-progress">Total Energy  </span> <div class="progress-bar" style="width:80%">3000 Kcals</div>
+            </div>
+            <div class="progress carbs">
+                <span class="label-progress">Total Carbohydrates  </span><div class="progress-bar" style="width:70%">150 g</div>
+            </div>
+            <div class="progress protein">
+                <span class="label-progress">Total Protein  </span><div class="progress-bar" style="width:75%">120 g</div>
+            </div>
+            <div class="progress fat">
+                <span class="label-progress">Total Fat </span><div class="progress-bar" style="width:30%">30 g</div>
+            </div>
+            <div class="progress fiber">
+                <span class="label-progress">Total Fiber </span><div class="progress-bar" style="width:50%">100 g</div>
+            </div>
         </div>
-        <div class="progress carbs">
-            <span class="label-progress">Total Carbohydrates  </span><div class="progress-bar" style="width:70%">150 g</div>
+        <div class="container-fluid">
+        <form onSubmit="return false;">
+            <input type="text" class="foodSearchInput"\>
+            <button class="searchFoodButton btn btn-primary" >Search</button>
+        </form>
         </div>
-        <div class="progress protein">
-            <span class="label-progress">Total Protein  </span><div class="progress-bar" style="width:75%">120 g</div>
-        </div>
-        <div class="progress fat">
-            <span class="label-progress">Total Fat </span><div class="progress-bar" style="width:30%">30 g</div>
-        </div>
-        <div class="progress fiber">
-            <span class="label-progress">Total Fiber </span><div class="progress-bar" style="width:50%">100 g</div>
-        </div>
-    </div>
-    <div class="container-fluid">
-    <form onSubmit="return false;">
-        <input type="text" class="foodSearchInput"\>
-        <button class="searchFoodButton btn btn-primary" >Search</button>
-    </form>
-    </div>
-    <div class="foodItem container-fluid">
+        <div class="foodItem container-fluid">
 
+        </div>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#weightModal">
+            Register your weight
+        </button>
     </div>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="weightModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Input your weight daily</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body row">
+                <input id="weight" type="text" class="col-9"\>
+                <button type="button" class="submitWeight col-3 btn btn-primary">Submit</button>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!-- bootsrap scripts and jquery -->

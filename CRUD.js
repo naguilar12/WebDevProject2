@@ -49,11 +49,23 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             console.log("Found the following records");
             console.log(docs);
             let challenges = [];
+            try {
+                let newChallenge = {};
+                newChallenge.kcals = challenge.kcals;
+                newChallenge.carbohydrates = challenge.carbohydrates;
+                newChallenge.protein = challenge.protein;
+                newChallenge.fat = challenge.fiber;
+                newChallenge.fiber = challenge.fiber;
+            }
+            catch(err){
+                callback(err);
+            }
+
             if (docs) {
                 challenges=docs[0].challenges;
             }
 
-            challenges.push(challenge);
+            challenges.push(newChallenge);
             collection.updateOne({userId: userId}
                 , {$set: {challenges: challenges}}, {upsert: true},
                 function (err, result) {
@@ -65,6 +77,17 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
         });
     }
     catch(err){
+        try {
+            let newChallenge = {};
+            newChallenge.kcals = challenge.kcals;
+            newChallenge.carbohydrates = challenge.carbohydrates;
+            newChallenge.protein = challenge.protein;
+            newChallenge.fat = challenge.fiber;
+            newChallenge.fiber = challenge.fiber;
+        }
+        catch(err){
+            callback(err);
+        }
         dbase.createCollection('challenges',{ size: 2148 });
         collection = dbase.collection('challenges');
         console.log(collection);
@@ -81,20 +104,31 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
 };
 exports.insertConsumption = function (db, callback, userId, consumption) {
     const dbase = db.db("nutrition"); //here
-
     // Get the documents collection
-    let collection = dbase.collection("consumptions");
+    let collection = dbase.collection("consumption");
     try {
         collection.find({'userId': userId}).toArray(function (err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
             let consumptions = [];
+            try {
+                let newconsumption = {};
+                newconsumption.kcals = consumption.kcals;
+                newconsumption.carbohydrates = consumption.carbohydrates;
+                newconsumption.protein = consumption.protein;
+                newconsumption.fat = consumption.fiber;
+                newconsumption.fiber = consumption.fiber;
+            }
+            catch(err){
+                callback(err);
+            }
+
             if (docs) {
                 consumptions=docs[0].consumptions;
             }
 
-            consumptions.push(consumption);
+            consumptions.push(newconsumption);
             collection.updateOne({userId: userId}
                 , {$set: {consumptions: consumptions}}, {upsert: true},
                 function (err, result) {
@@ -106,6 +140,17 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
         });
     }
     catch(err){
+        try {
+            let newconsumption = {};
+            newconsumption.kcals = consumption.kcals;
+            newconsumption.carbohydrates = consumption.carbohydrates;
+            newconsumption.protein = consumption.protein;
+            newconsumption.fat = consumption.fiber;
+            newconsumption.fiber = consumption.fiber;
+        }
+        catch(err){
+            callback(err);
+        }
         dbase.createCollection('consumptions',{ size: 2148 });
         collection = dbase.collection('consumptions');
         console.log(collection);
