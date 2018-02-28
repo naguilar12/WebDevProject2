@@ -62,3 +62,10 @@ $(".submitWeight").on("click", function(){
    console.log(url);
    
 });
+
+function main(){
+    $("#challenge-option").click();
+    $("#challenge-link").click();
+}
+
+$(document).ready(main);
