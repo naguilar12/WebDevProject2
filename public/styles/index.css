@@ -1,0 +1,53 @@
+.center-items {
+    text-align: center;
+    margin: auto;
+    position: center;
+
+}
+
+.banner{
+    background-image: url("../resources/diet_banner.jpeg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: 100vh;
+}
+
+.banner-content{
+    height: 100vh;
+    background-color: rgba(80,80,80,0.5);
+}
+
+.banner-content h1{
+    font-family: 'Satisfy', cursive;
+    font-size: 25vh;
+    color: white;
+}
+
+.banner-content h3{
+    font-family: 'Neuton', serif;
+    font-size: 10vh;
+    color: rgb(207,164,60);
+}
+
+.start-button{
+    font-family: 'Mukta Mahee', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .banner-content h1{
+        font-family: 'Satisfy', cursive;
+        font-size: 10vh;
+        color: white;
+    }
+
+    .banner-content h3{
+        font-family: 'Satisfy', cursive;
+        font-size: 5vh;
+        color: rgb(207,164,60);
+    }
+}
