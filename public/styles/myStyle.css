@@ -1,8 +1,18 @@
+.center-items {
+    text-align: center;
+    margin: auto;
+    position: center;
+
+}
+
+#challenge-today{
+    height: 100%;
+}
+
 .progress{
     padding: 1%;
 }
-width:89%;
-}
+
 .label-progress{
     width:20%
 }
@@ -14,4 +24,8 @@ width:89%;
 card{
     margin:2%;
     padding:2%;
-}.foodSearchInput{
+}
+
+.foodSearchInput{
+     width:89%;
+}
