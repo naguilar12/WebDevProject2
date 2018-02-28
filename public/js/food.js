@@ -60,5 +60,8 @@ $(".submitWeight").on("click", function(){
    let temporalId=1;
    let url= root+"/API/myWeight/"+temporalId+"/"+$("#weight").value;
    console.log(url);
+   $.post(url, funtion(data){
+       console.log("Weight added correctly.");
+    })
    
 });
