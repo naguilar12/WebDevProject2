@@ -46,8 +46,12 @@
     }
 
     .banner-content h3{
-        font-family: 'Satisfy', cursive;
+        font-family: 'Neuton', cursive;
         font-size: 5vh;
         color: rgb(207,164,60);
+    }
+
+    .start-button{
+        font-family: 'Mukta Mahee', sans-serif;
     }
 }
