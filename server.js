@@ -21,7 +21,42 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", (req, res) => res.sendfile("public", "index.html"));
+app.get("/", (req, res) =>{
+    console.log("hola");
+    console.log("Cookies :  ", req.cookies);
+    if(req.cookies){
+        res.cookie(cookie_name , 'cookie_value').send('Cookie is set');
+    }else{
+        res.sendfile("public", "index.html")
+    }
+});
+
+app.get("/index.html", (req, res) =>{
+    console.log("Cookies :  ", req.cookies);
+    if(req.cookies){
+
+    }else{
+        res.sendfile("public", "index.html");
+    }
+});
+
+app.get("/challenge.html", (req, res) =>{
+    console.log("Cookies :  ", req.cookies);
+    if(req.cookies){
+        res.sendfile("public", "challenge.html");
+    }else{
+        res.sendfile("public", "index.html");
+    }
+});
+
+app.get("/stats.html", (req, res) => {
+    console.log("Cookies :  ", req.cookies);
+    if(req.cookies){
+        res.sendfile("public", "stats.html");
+    }else{
+        res.sendfile("public", "index.html");
+    }
+});
 
 app.get("/API/food/:name", function (req, res) {
     // CALL API HERE

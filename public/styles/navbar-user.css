@@ -1,5 +1,5 @@
 /*------------
-Navbar Styles
+User Navbar Styles
  ------------*/
 
 nav{
@@ -63,6 +63,14 @@ nav{
 
 .navbar-toggler-icon{
     color: rgb(207,164,60);
+}
+
+.user-item{
+    height: 100%;
+}
+
+.dropdown-toggle::after {
+    display:none
 }
 
 /*------------

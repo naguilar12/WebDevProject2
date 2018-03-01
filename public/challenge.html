@@ -23,7 +23,7 @@
 
     <!--My style sheet-->
     <link rel="stylesheet" href="styles/challenge.css">
-    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/navbar-user.css">
 </head>
 <body>
 
@@ -41,29 +41,34 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li id="home-option" class="nav-item">
-                <a id="home-link" class="nav-link" href="index.html">
+            <li id="home-option" class="nav-item center-items">
+                <a id="home-link" class="nav-link">
                     <i class="fa fa-home"></i><br>
                     Home
                 </a>
             </li>
-            <li id="my-stats-option" class="nav-item">
+            <li id="my-stats-option" class="nav-item center-items">
                 <a id="my-stats-link" class="nav-link" href="stats.html">
                     <i class="fa fa-line-chart"></i><br>
                     My Stats
                 </a>
             </li>
-            <li id="challenge-option" class="nav-item">
-                <a id="challenge-link" class="nav-link" href="comida.html">
+            <li id="challenge-option" class="nav-item center-items">
+                <a id="challenge-link" class="nav-link" href="challenge.html">
                     <i class="fa fa-cutlery"></i><br>
                     Challenge
                 </a>
             </li>
-            <li id="contact-option" class="nav-item">
-                <a id="contact-link" class="nav-link" href="#">
-                    <i class="fa fa-phone"></i><br>
-                    Contact
+            <li id="user-option" class="nav-item  center-items">
+                <a class="nav-link dropdown-toggle user-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user-circle"></i><br>
+                    Name
                 </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-power-off"></i>  Logout
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
@@ -152,7 +157,7 @@
 </script>
 
 <!--My scripts-->
-<script src="js/navbar.js"></script>
+<script src="js/navbar-user.js"></script>
 <script src="js/food.js"></script>
 
 </body>
