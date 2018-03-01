@@ -3,6 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 const assert = require('assert');
 const request = require('request');
 const CRUD = require("./CRUD");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -18,10 +19,9 @@ const dbName = 'nutrition';
 app.use(express.static("public"));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => res.sendfile("public", "index.html"));
-
-
 
 app.get("/API/food/:name", function (req, res) {
     // CALL API HERE
@@ -112,6 +112,7 @@ app.post("/API/myChallenge/:userId", function (req, res) {
         }, Number(req.params.userId), req.body);
     });
 });
+
 app.get("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
 
@@ -125,6 +126,7 @@ app.get("/API/myConsumption/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+
 app.post("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption add value
     if (Number(req.params.userId) !== req.params.userId) {
@@ -142,6 +144,7 @@ app.post("/API/myConsumption/:userId", function (req, res) {
         }, Number(req.params.userId), req.body);
     });
 });
+
 
 
 app.listen(process.env.PORT || 80, () => {
