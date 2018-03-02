@@ -1,40 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta description="Here you add food to meet your calorical daily challenge "/>
+    <meta author="Juan Manuel Lovera and Tomas Felipe Venegas">
+    <link rel="icon" href="../../public/resources/diet_advisor_logo_min.png">
+    <title>DietAdvisor</title>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Twitter Followers</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Neuton|Satisfy|Mukta+Mahee" rel="stylesheet">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    <!-- WOW JS CSS -->
+    <link rel="stylesheet" href="../../public/styles/animate.css">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="../../public/styles/navbar.css">
+    <link rel="stylesheet" href="../../public/styles/index.css">
+</head>
+<body>
+
+<!-- App Navbar -->
+<nav class="navbar navbar-inverse navbar-toggleable-md fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="index.html"><img class="img-responsive" id="navbar_logo" src="../../public/resources/diet_advisor_logo.png"
+                                          alt="diet_advisor_logo"></a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li id="home-option" class="nav-item">
+                <a id="home-link" class="nav-link" href="index.html">
+                    <i class="fa fa-home"></i><br>
+                    Home
+                </a>
+            </li>
+            <li id="contact-option" class="nav-item">
+                <a id="contact-link" class="nav-link" href="#">
+                    <i class="fa fa-phone"></i><br>
+                    Contact
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Welcome Banner -->
+<div class="container-fluid banner">
+    <div class="row justify-content-around banner-content">
+        <div class="col center-items">
+            <div class="row justify-content-around">
+                <h1 class="col wow fadeInDown">Hi there!</h1>
+            </div>
+            <div class="row justify-content-around">
+                <h3 class="col wow fadeInUp">Welcome to the dark side of diets, we have pizza!</h3>
+            </div>
+            <br><br>
+            <div class="row justify-content-around">
+                <button class="btn start-button wow fadeIn">
+                    GET STARTED
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About section -->
+<div class="container-fluid about">
+    <div class="row about-content justify-content-around">
+        <div class="col-sm-4 center-items wow fadeInLeft">
+            <h1 class="col">About</h1>
+            <img class="col" src="../../public/resources/about-ying-yang.png" alt="about-ying-yang">
+        </div>
+        <div class="col-sm-8 center-items wow fadeInRight">
+            <div class="row justify-content-around">
+                <h1>We help you eat what you want!</h1>
+                <p>This is an open source project were users can take control of
+                    their diary calories consumption.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features section -->
+<div class="container-fluid features">
+    <div class="row features-content justify-content-around">
+
+    </div>
+</div>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+<!-- WOW JS scripts -->
+<script src="../../public/js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
+
+<!-- Local Scripts -->
+<script src="../../public/js/navbar.js"></script>
+<script src="../../public/js/index.js"></script>
+</body>
 </html>
