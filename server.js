@@ -4,7 +4,7 @@ const assert = require('assert');
 const request = require('request');
 const CRUD = require("./CRUD");
 const cookieParser = require("cookie-parser");
-
+const path = require("path");
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -16,11 +16,14 @@ const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.m
 const dbName = 'nutrition';
 
 //Uses static directory "public"
-app.use(express.static("public"));
+//app.use(express.static("public"));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
+
+/*
 app.get("/", (req, res) =>{
     console.log("hola");
     console.log("Cookies :  ", req.cookies);
@@ -30,7 +33,7 @@ app.get("/", (req, res) =>{
         res.sendfile("public", "index.html")
     }
 });
-
+*/
 app.get("/index.html", (req, res) =>{
     console.log("Cookies :  ", req.cookies);
     if(req.cookies){
