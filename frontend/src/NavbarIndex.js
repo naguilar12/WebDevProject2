@@ -1,22 +1,9 @@
 import React,  { Component }  from "react";
-import ReactDOM from "react-dom";
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/NavbarIndex.css"
 import registerServiceWorker from "./registerServiceWorker";
 
-export default class NavbarIndex extends React.Component{
+export default class NavbarIndex extends Component{
     constructor(props) {
         super(props);
 

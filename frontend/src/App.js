@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './NavbarIndex';
-import MainChallenge from './challenge';
+import MainChallenge from './Challenge';
 
 class App extends Component {
 
