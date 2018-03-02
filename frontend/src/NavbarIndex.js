@@ -1,4 +1,4 @@
-import React from "react";
+import React,  { Component }  from "react";
 import ReactDOM from "react-dom";
 import {
     Collapse,
@@ -42,7 +42,7 @@ export default class NavbarIndex extends Component{
                                 <NavLink href="/components/">Components</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                                <NavLink>Github</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -69,9 +69,5 @@ export default class NavbarIndex extends Component{
     }
 }
 
-ReactDOM.render(
-    <Navbar/>,
-    document.getElementById('navbar-index')
-);
 
 registerServiceWorker();

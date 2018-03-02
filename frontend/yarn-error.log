@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js build
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install reactstrap
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\PostgreSQL\pg95\bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\veneg\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\veneg\AppData\Local\Programs\Python\Python36\;C:\Users\veneg\AppData\Local\Microsoft\WindowsApps;C:\Users\veneg\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Users\veneg\AppData\Local\Yarn\bin
@@ -21,7 +21,9 @@ npm manifest:
     "dependencies": {
       "react": "^16.2.0",
       "react-dom": "^16.2.0",
-      "react-scripts": "1.1.1"
+      "react-scripts": "1.1.1",
+      "bootstrap": "^4.0.0",
+      "reactstrap": "^4.8.0"
     },
     "scripts": {
       "start": "react-scripts start",
@@ -7239,18 +7241,10 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 1
-  Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c react-scripts build
-  Directory: C:\Users\veneg\git\WebDevProject2\frontend
-  Output:
-  
-      at ProcessTermError.Error (native)
-      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
-      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
-      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
-      at emitTwo (events.js:106:13)
-      at ChildProcess.emit (events.js:191:7)
-      at maybeClose (internal/child_process.js:891:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add reactstrap" instead.
+      at MessageError.Error (native)
+      at new MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at Object.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:21987:13)
+      at next (native)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
