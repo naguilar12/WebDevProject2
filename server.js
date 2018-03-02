@@ -1,11 +1,10 @@
 let express = require("express");
 let path = require("path");
-let favicon = require("serve-favicon");
 let logger = require("morgan");
 let cookieParser = require("cookie-parser");
 let bodyParser = require("body-parser");
 
-let index = require("./routes/index");
+let api = require("./routes/api");
 // let users = require("./routes/users");
 
 let app = express();

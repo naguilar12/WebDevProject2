@@ -4,7 +4,7 @@ const assert = require("assert");
 let router = express.Router();
 
 
-app.get("/food/:name", function (req, res) {
+router.get("/food/:name", function (req, res) {
     // CALL API HERE
     request("https://api.nal.usda.gov/ndb/search/?format=json&q=" + req.params.name + "&max=25&offset=0&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
         function (error, response, body) {
@@ -16,7 +16,7 @@ app.get("/food/:name", function (req, res) {
             }
         })
 });
-app.get("/food/nutrition/:id", function (req, res) {
+router.get("/food/nutrition/:id", function (req, res) {
     // CALL API HERE
     let url = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=" + req.params.id + "&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3";
     request(url,
@@ -41,7 +41,7 @@ app.get("/food/nutrition/:id", function (req, res) {
 
 });
 
-app.post("/myWeight/:userId/:value", function (req, res) {
+router.post("/myWeight/:userId/:value", function (req, res) {
     //TODO: search db if user already has a document of weights add value, else create document
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
@@ -53,7 +53,7 @@ app.post("/myWeight/:userId/:value", function (req, res) {
     });
 });
 
-app.get("/myWeight/:userId", function (req, res) {
+router.get("/myWeight/:userId", function (req, res) {
     // search db if user already has a document of weights add value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -67,7 +67,7 @@ app.get("/myWeight/:userId", function (req, res) {
     });
 });
 
-app.get("/myChallenge/:userId", function (req, res) {
+router.get("/myChallenge/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -80,7 +80,7 @@ app.get("/myChallenge/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
-app.post("/myChallenge/:userId", function (req, res) {
+router.post("/myChallenge/:userId", function (req, res) {
     // search db if user already has a document of challenge add value
 
     console.log(req.body.kcals);
@@ -94,7 +94,7 @@ app.post("/myChallenge/:userId", function (req, res) {
     });
 });
 
-app.get("/myConsumption/:userId", function (req, res) {
+router.get("/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -108,7 +108,7 @@ app.get("/myConsumption/:userId", function (req, res) {
     });
 });
 
-app.post("/myConsumption/:userId", function (req, res) {
+router.post("/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption add value
     if (Number(req.params.userId) !== req.params.userId) {
         res.send(Response.error());
@@ -125,4 +125,5 @@ app.post("/myConsumption/:userId", function (req, res) {
         }, Number(req.params.userId), req.body);
     });
 });
+module.exports = router;
 
