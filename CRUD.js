@@ -1,5 +1,9 @@
 const assert = require('assert');
 exports.insertWeight = function (db, callback, userId, weight) {
+    if (!weight){
+        callback(null);
+        return;
+    }
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
     let collection = dbase.collection("weights");
@@ -9,13 +13,28 @@ exports.insertWeight = function (db, callback, userId, weight) {
             console.log("Found the following records");
             console.log(docs);
             let weights = [];
+            let dates = [];
+            let date = new Date();
+            date=date/(3600*1000);
             if (docs && docs.length>0) {
                 weights = docs[0].weights;
+                dates=docs[0].dates;
+                if (date-dates[dates.length-1]<20){//if actual date is not at least 20 hours later
+                    weights.pop();
+                    weights.push(weight);
+                    dates.pop();
+                    dates.push(date);
+                }
+                else{
+                    weights.push(weight);
+                    dates.push(date);
+                }
+            }else{
+                weights.push(weight);
+                dates.push(date);
             }
-
-            weights.push(weight);
             collection.updateOne({userId: userId}
-                , {$set: {weights: weights}}, {upsert: true},
+                , {$set: {weights: weights, dates: dates}}, {upsert: true},
                 function (err, result) {
                     assert.equal(err, null);
                     assert.equal(1, result.result.n);
@@ -309,4 +328,16 @@ exports.getLastConsumption = function (db, callback, userId) {
             callback(null);
         }
     });
+};
+exports.dropCollections = function (db, callback, userId) {
+    const dbase = db.db("nutrition"); //here
+
+    // Get the documents collection
+    let collection = dbase.collection('consumptions');
+    collection.drop();
+    collection= dbase.collection('weights');
+    collection.drop();
+    collection= dbase.collection('chsllenges');
+    collection.drop();
+    callback();
 };
