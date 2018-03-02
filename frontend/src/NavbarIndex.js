@@ -32,8 +32,8 @@ export default class NavbarIndex extends React.Component{
     }
     render(){
         return(
-            <nav classNameName="navbar navbar-inverse navbar-toggleable-md fixed-top">
-                <button classNameName="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            <nav className="navbar navbar-inverse navbar-toggleable-md fixed-top">
+                <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
