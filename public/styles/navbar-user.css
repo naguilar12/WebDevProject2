@@ -1,5 +1,5 @@
 /*------------
-Navbar Styles
+User Navbar Styles
  ------------*/
 
 nav{
@@ -29,7 +29,6 @@ nav{
     background-color: rgb(207,164,60);
     transition: background-color 0.5s ease;
     transition: color 0.5s ease;
-    transition: border-bottom-color 0.5s ease;
     border-bottom: white solid 2px;
     color: white;
 }
@@ -63,6 +62,18 @@ nav{
 
 .navbar-toggler-icon{
     color: rgb(207,164,60);
+}
+
+.user-item{
+    height: 100%;
+}
+
+.dropdown-toggle{
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    display:none;
 }
 
 /*------------
