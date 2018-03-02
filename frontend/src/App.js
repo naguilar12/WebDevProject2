@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './NavbarIndex';
+import MainChallenge from './challenge';
 
 class App extends Component {
 
@@ -8,29 +9,16 @@ class App extends Component {
     super(props);
 
     this.state={
-      followers:[]
+      location: 'index'
     };
-  }
-
-  componentDidMount() {
-    let me = this;
-    fetch("http://localhost:3001/api/petrogustavo")
-      .then((res) => {
-        return res.json();
-      })
-      .then((followers) => {
-        me.setState({followers:followers});
-      })
-      .catch((err) => console.log(err) );
-    
   }
 
 
   render() {
     return (
       <div className="App">
-
-        <NavBar/>
+          <NavBar/>
+          <MainChallenge/>
       </div>
     );
   }

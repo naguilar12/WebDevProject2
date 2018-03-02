@@ -75,8 +75,8 @@
 </nav>
 
 <div id="challenge-today" class="container-fluid">
-    <div  class="row justify-content-around center-items challenge-items">
-        <div class="col-sm-9 center-items">
+    <div  class="justify-content-around center-items challenge-items">
+        <div class="center-items">
             <h1 class="d-flex justify-content-center">Let's see today's challenge!</h1>
             <div class="container-fluid remainingVals">
                 <div class="progress kcals">
@@ -100,6 +100,11 @@
                     <div class="progress-bar" style="width:50%">100 g</div>
                 </div>
             </div>
+            <div class="center-items">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#weightModal">
+                    Register your weight
+                </button>
+            </div>
             <div class="container-fluid">
                 <form onSubmit="return false;">
                     <input type="text" class="foodSearchInput" \>
@@ -110,11 +115,7 @@
 
             </div>
         </div>
-        <div class="col-sm-3 center-items">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#weightModal">
-                Register your weight
-            </button>
-        </div>
+
     </div>
 </div>
 
