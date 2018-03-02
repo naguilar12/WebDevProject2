@@ -16,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/NavbarIndex.css"
 import registerServiceWorker from "./registerServiceWorker";
 
-export default class NavbarIndex extends Component{
+export default class NavbarIndex extends React.Component{
     constructor(props) {
         super(props);
 
