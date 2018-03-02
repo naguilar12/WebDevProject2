@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import NavBar from './NavbarIndex';
 
 class App extends Component {
 
@@ -29,13 +30,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <h1>Followers </h1>
-        <div>{this.state.followers.map(
-          (f) => {
-            return (<div>{f.follower.screen_name}</div>);
-          })
-        }</div>
-        <div>Made by John with <span role="img">❤</span>️</div>
+        <NavBar/>
       </div>
     );
   }
