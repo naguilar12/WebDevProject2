@@ -14,6 +14,7 @@ import {
     DropdownItem } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/NavbarIndex.css"
+import registerServiceWorker from "./registerServiceWorker";
 
 export default class NavbarIndex extends Component{
     constructor(props) {
@@ -72,3 +73,5 @@ ReactDOM.render(
     <Navbar/>,
     document.getElementById('navbar-index')
 );
+
+registerServiceWorker();
