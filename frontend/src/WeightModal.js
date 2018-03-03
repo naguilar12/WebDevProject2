@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 
 
 export default class WeightModal extends Component{
+    constructor(props) {
+        super(props);
+
+        this.state={
+            weight:props.weight
+        };
+    }
+
     render() {
+        let actual=<span></span>;
+        if (this.state.weight){
+            actual=<span> Today's register weight is {this.state.weight}</span>
+        }
         return (
             <div className="modal fade" id="weightModal">
                 <div className="modal-dialog">
@@ -18,10 +30,9 @@ export default class WeightModal extends Component{
                         <div className="modal-body row">
                             <input id="weight" type="text" className="col-9" />
                             <button type="button" className="submitWeight col-3 btn btn-primary">Submit</button>
-
+                            {actual}
                         </div>
 
-                        
                         <div className="modal-footer">
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
