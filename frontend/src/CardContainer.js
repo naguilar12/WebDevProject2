@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 
 export default class CardContainer extends Component{
-    constructor(props) {
-        super(props);
-
-        this.state={
-            foods: props.foods,
-            chosenFood: props.chosenFood,
-        };
-    }
     render(){
         let foodCard= null;
-        if (this.state.chosenFood){
+        let rows= [];
+        if (this.props.chosenFood){
             foodCard=(<div className='card' key={this.state.chosenFood.ndbno}>
                 <div className="card-body">
                     <h5>{this.state.chosenFood.name.toLowerCase()}</h5>
@@ -31,15 +24,19 @@ export default class CardContainer extends Component{
                 </div>
             </div>);
         }
+        this.props.foods.forEach(
+            (f) => {
+                return (rows.push(<div className='card' key={f.ndbno}>
+                    <div className="card-body">
+                        <h5>{f.name.toLowerCase()}</h5>
+                    </div>
+                </div>));
+            });
+
         return (
             <div className="foodItem container-fluid">
-                {this.state.foods.map(
-                    (f) => {
-                        return (<div className='card' key={f.ndbno}>
-                            <div className="card-body"><h5>{f.name.toLowerCase()}</h5></div>
-                        </div>);
-                    })
-                }
+                {rows}
+                {foodCard}
             </div>
         );
     }

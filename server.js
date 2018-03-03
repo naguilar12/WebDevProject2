@@ -22,6 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 /*
 app.get("/", (req, res) =>{
@@ -69,7 +74,12 @@ app.get("/API/food/:name", function (req, res) {
                 console.log(error);
             }
             if (!error && response.statusCode == 200) {
-                res.send(JSON.parse(body).list.item);
+                if(JSON.parse(body).list) {
+                    res.send(JSON.parse(body).list.item);
+                }
+                else{
+                    res.send([]);
+                }
             }
         })
 });
