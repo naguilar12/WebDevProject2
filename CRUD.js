@@ -55,6 +55,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
                 newChallenge.protein = challenge.protein;
                 newChallenge.fat = challenge.fiber;
                 newChallenge.fiber = challenge.fiber;
+                newChallenge.date= new Date();
                 if (docs &&docs.length>0) {
                     challenges = docs[0].challenges;
                 }
@@ -84,6 +85,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             newChallenge.protein = challenge.protein;
             newChallenge.fat = challenge.fiber;
             newChallenge.fiber = challenge.fiber;
+            newChallenge.date= new Date();
             dbase.createCollection('challenges', {size: 2148});
             collection = dbase.collection('challenges');
             console.log(collection);
@@ -121,6 +123,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
                 newconsumption.protein = consumption.protein;
                 newconsumption.fat = consumption.fiber;
                 newconsumption.fiber = consumption.fiber;
+                newconsumption.date= new Date();
                 if (docs  &&docs.length>0) {
                     consumptions = docs[0].consumptions;
                 }
@@ -151,6 +154,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
             newconsumption.protein = consumption.protein;
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
+            newconsumption.date= new Date();
             dbase.createCollection('consumptions', {size: 2148});
             collection = dbase.collection('consumptions');
             console.log(collection);

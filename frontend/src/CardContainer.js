@@ -1,36 +1,19 @@
 import React, { Component } from 'react';
+import Card from "./Card";
+import DetailedCard from "./DetailedCard";
 
 export default class CardContainer extends Component{
     render(){
         let foodCard= null;
         let rows= [];
+        let handleCardClick=this.props.handleCardClick;
         if (this.props.chosenFood){
-            foodCard=(<div className='card' key={this.state.chosenFood.ndbno}>
-                <div className="card-body">
-                    <h5>{this.state.chosenFood.name.toLowerCase()}</h5>
-                    <p>Portion: 100g</p>
-                    <div className="row">
-                        <div className="col-2">Portein: {this.state.chosenFood.protein} g</div>
-                        <div className="col-3">Carbohydrates: {this.state.chosenFood.carbohydrates} g</div>
-                        <div className="col-2">Fat: {this.state.chosenFood.fat} g</div>
-                        <div className="col-2">Fiber: {this.state.chosenFood.fiber} g</div>
-                        <div className="col-3">Energy: {this.state.chosenFood.kcals} Kcals</div>
-                    </div>
-                    <div className="row">
-                        <input type="text" value={1} className="col-2"/>
-                        <span className="col-1"></span>
-                        <button className="btn-primary btn col-4" id='portionsTakenBut'>Submit</button>
-                    </div>
-                </div>
-            </div>);
+            foodCard=(<DetailedCard chosenFood={this.props.chosenFood} portions={this.props.portions} onPortionChange={this.props.onPortionChange}/>);
         }
+
         this.props.foods.forEach(
             (f) => {
-                return (rows.push(<div className='card' key={f.ndbno}>
-                    <div className="card-body">
-                        <h5>{f.name.toLowerCase()}</h5>
-                    </div>
-                </div>));
+                return (rows.push(<Card  handleCardClick={handleCardClick} id={f.ndbno} key={f.ndbno} name={f.name}/>));
             });
 
         return (

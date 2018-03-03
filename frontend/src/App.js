@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
 
     this.state={
-      location: 'challenge'
+      location: 'challenge',
+        idUser: 1
     };
     this.callbackNavbar=this.callbackNavbar.bind(this);
   }
@@ -31,15 +32,19 @@ class App extends Component {
           main = <Stats/>;
       }
       else if(this.state.location==='challenge'){
-          main = <MainChallenge/>;
+          main = <MainChallenge idUser={this.state.idUser}/>;
       }
       else{
           main = <Login/>;
       }
     return (
       <div className="App">
-          <NavBar onChange={this.callbackNavbar}/>
+          <div>
+            <NavBar onChange={this.callbackNavbar}/>
+          </div>
+          <div>
           {main}
+          </div>
       </div>
     );
   }

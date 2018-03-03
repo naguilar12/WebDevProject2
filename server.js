@@ -23,8 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -93,16 +94,19 @@ app.get("/API/food/nutrition/:id", function (req, res) {
             }
             if (!error && response.statusCode == 200) {
                 let food = JSON.parse(body).foods[0].food;
-
-                item = {
-                    name: food.desc.name,
-                    kcals: food.nutrients[1].value,
-                    protein: food.nutrients[3].value,
-                    fat: food.nutrients[4].value,
-                    carbohydrates: food.nutrients[6].value,
-                    fiber: food.nutrients[7].value
-                };
+                item=null;
+                if(food){
+                    item = {
+                        name: food.desc.name,
+                        kcals: food.nutrients[1].value,
+                        protein: food.nutrients[3].value,
+                        fat: food.nutrients[4].value,
+                        carbohydrates: food.nutrients[6].value,
+                        fiber: food.nutrients[7].value
+                    };
+                }
                 res.send(item);
+
             }
         })
 

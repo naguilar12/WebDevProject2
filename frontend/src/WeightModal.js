@@ -4,16 +4,29 @@ import React, { Component } from 'react';
 export default class WeightModal extends Component{
     constructor(props) {
         super(props);
-
         this.state={
-            weight:props.weight
+            weight: props.weight
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.onClick = this.onClick.bind(this);
+
     }
 
+    handleChange(e) {
+        if(Number(e.target.value)) {
+            this.setState({weight: Number(e.target.value)});
+        }
+        else{
+            this.setState({weight: 0});
+        }
+    }
+    onClick(){
+        this.props.onClick(this.state.weight);
+    }
     render() {
         let actual=<span></span>;
-        if (this.state.weight){
-            actual=<span> Today's register weight is {this.state.weight}</span>
+        if (this.props.weight){
+            actual=<span> Today's register weight is {this.props.weight}</span>
         }
         return (
             <div className="modal fade" id="weightModal">
@@ -28,13 +41,13 @@ export default class WeightModal extends Component{
 
                         
                         <div className="modal-body row">
-                            <input id="weight" type="text" className="col-9" />
-                            <button type="button" className="submitWeight col-3 btn btn-primary">Submit</button>
+                            <input id="weight" type="text" className="col-9" onChange={this.handleChange}/>
+                            <button type="button" className="submitWeight col-3 btn btn-primary" onClick={this.onClick}>Submit</button>
                             {actual}
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal" >Close</button>
                         </div>
 
                     </div>
