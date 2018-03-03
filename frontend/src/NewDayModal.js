@@ -26,8 +26,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     protein: val,
-                    kcals: prevState.kcals + val * 4,
-                    fiber: prevState.fiber + (val * 4) / 1000 * 15
+                    kcals: prevState.kcals + val * 4 - prevState.protein*4,
+                    fiber: prevState.fiber + (val * 4 - prevState.protein*4) / 1000 * 15
                 }
             });
         }
@@ -58,8 +58,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     carbohydrates: val,
-                    kcals: prevState.kcals + val * 4,
-                    fiber: prevState.fiber + (val * 4) / 1000 * 15
+                    kcals: prevState.kcals + val * 4- prevState.carbohydrates*4,
+                    fiber: prevState.fiber + (val * 4- prevState.carbohydrates*4) / 1000 * 15
                 }
             });
         }
@@ -75,8 +75,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     fat: val,
-                    kcals: prevState.kcals + val * 9,
-                    fiber: prevState.fiber + (val * 9) / 1000 * 15
+                    kcals: prevState.kcals + val * 9 - prevState.fat*9,
+                    fiber: prevState.fiber + (val * 9- prevState.fat*9) / 1000 * 15
                 }
             });
         }
@@ -153,7 +153,7 @@ export default class NewDayModal extends Component {
                                 <div className="col-3">Kcals
                                 </div>
                             </div>
-                            <div>
+                            <div className="row">
                                 <button type="button" className="submitWeight col-3 btn btn-primary"
                                         onClick={this.handleSubmit}>Start
                                 </button>
@@ -162,7 +162,9 @@ export default class NewDayModal extends Component {
                         </div>
 
                         <div className="modal-footer">
+                            <div className="col-6"></div>
                             <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
+                            <div className="col3"></div>
                         </div>
 
                     </div>

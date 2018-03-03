@@ -13,7 +13,7 @@ export default class mainChallenge extends Component {
             foods: [],
             chosenFood: null,
             kcals: {
-                total: 1,
+                total: 17,
                 actual: 0
             },
             protein: {

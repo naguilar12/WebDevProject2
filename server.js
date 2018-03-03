@@ -87,6 +87,7 @@ app.get("/API/food/:name", function (req, res) {
 app.get("/API/food/nutrition/:id", function (req, res) {
     // CALL API HERE
     let url = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=" + req.params.id + "&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3";
+    console.log(url);
     request(url,
         function (error, response, body) {
             if (error) {
@@ -95,14 +96,32 @@ app.get("/API/food/nutrition/:id", function (req, res) {
             if (!error && response.statusCode == 200) {
                 let food = JSON.parse(body).foods[0].food;
                 item=null;
+                let kcals,protein,fat,carbohydrates,fiber;
                 if(food){
+                    food.nutrients.forEach((n)=>{
+                       if (n.name==="Energy") {
+                           kcals = n.value;
+                       }
+                       else if(n.name==="Protein"){
+                           protein = n.value;
+                       }
+                       else if(n.name === "Total lipid (fat)"){
+                           fat= n.value;
+                       }
+                       else if(n.name === "Carbohydrate, by difference"){
+                           carbohydrates = n.value;
+                       }
+                       else if ( n.name === "Fiber, total dietary"){
+                           fiber = n.value;
+                       }
+                    });
                     item = {
                         name: food.desc.name,
-                        kcals: food.nutrients[1].value,
-                        protein: food.nutrients[3].value,
-                        fat: food.nutrients[4].value,
-                        carbohydrates: food.nutrients[6].value,
-                        fiber: food.nutrients[7].value
+                        kcals: kcals,
+                        protein: protein,
+                        fat: fat,
+                        carbohydrates: carbohydrates,
+                        fiber: fiber
                     };
                 }
                 res.send(item);

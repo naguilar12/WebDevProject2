@@ -14,7 +14,7 @@ export default class DetailedCard extends Component {
 
     render() {
         return (
-            <div className='card' key={this.props.chosenFood.ndbno}>
+            <div className='card' key={this.props.chosenFood.ndbno} id={this.props.chosenFood.ndbno}>
                 <div className="card-body">
                     <h5>{this.props.chosenFood.name.toLowerCase()}</h5>
                     <p>Portion: 100g</p>
