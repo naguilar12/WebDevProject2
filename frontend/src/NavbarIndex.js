@@ -50,7 +50,7 @@ export default class NavbarIndex extends Component{
                                 Name
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" href="#">
+                                <a className="dropdown-item" >
                                     <i className="fa fa-power-off"></i>  Logout
                                 </a>
                             </div>

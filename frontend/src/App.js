@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state={
-      location: 'index'
+      location: 'challenge'
     };
     this.callbackNavbar=this.callbackNavbar.bind(this);
   }
