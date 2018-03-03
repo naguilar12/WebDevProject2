@@ -9,13 +9,32 @@ exports.insertWeight = function (db, callback, userId, weight) {
             console.log("Found the following records");
             console.log(docs);
             let weights = [];
+            let dates = [];
             if (docs && docs.length>0) {
                 weights = docs[0].weights;
+                dates = docs[0].dates;
             }
-
-            weights.push(weight);
+            let todate= new Date();
+            todate= todate/3600000
+            if (dates && dates.length>0){
+                let date= dates[dates.length-1];
+                if (todate-date<20){
+                    weights.pop();
+                    weights.push(weight);
+                    dates.pop();
+                    dates.push(todate);
+                }
+                else{
+                    weights.push(weight);
+                    dates.push(todate);
+                }
+            }
+            else{
+                weights.push(weight);
+                dates.push(todate);
+            }
             collection.updateOne({userId: userId}
-                , {$set: {weights: weights}}, {upsert: true},
+                , {$set: {weights: weights, dates:dates}}, {upsert: true},
                 function (err, result) {
                     assert.equal(err, null);
                     assert.equal(1, result.result.n);
@@ -256,7 +275,8 @@ exports.getLastWeight = function (db, callback, userId) {
             let weights = docs[0].weights;
             if (weights && weights.length > 0) {
                 let w = weights[weights.length - 1];
-                callback(w);
+                console.log(w);
+                callback(JSON.stringify(w));
             } else {
                 callback(null);
             }
@@ -305,6 +325,7 @@ exports.getLastConsumption = function (db, callback, userId) {
             let consumptions = docs[0].consumptions;
             if (consumptions && consumptions.length > 0) {
                 let w = consumptions[consumptions.length - 1];
+
                 callback(w);
             } else {
                 callback(null);
@@ -313,4 +334,17 @@ exports.getLastConsumption = function (db, callback, userId) {
             callback(null);
         }
     });
+};
+
+exports.dropCollections = function (db, callback, userId) {
+    const dbase = db.db("nutrition"); //here
+
+    // Get the documents collection
+    let collection = dbase.collection('consumptions');
+    collection.drop();
+    collection= dbase.collection('weights');
+    collection.drop();
+    collection= dbase.collection('chsllenges');
+    collection.drop();
+    callback();
 };

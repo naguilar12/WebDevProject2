@@ -5,6 +5,10 @@ import WeightModal from "./WeightModal";
 import CardContainer from "./CardContainer";
 import NewDayModal from "./NewDayModal";
 
+/**
+ * This class contains all the components needed to display the challenge page
+ */
+
 export default class mainChallenge extends Component {
     constructor(props) {
         super(props);
@@ -36,17 +40,25 @@ export default class mainChallenge extends Component {
             searchValue: "",
             portions: 1
         };
+        //bind all functions
         this.searchCallback = this.searchCallback.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.onPortionChange = this.onPortionChange.bind(this);
         this.handleCardClick = this.handleCardClick.bind(this);
-
         this.onSubmitNewDay = this.onSubmitNewDay.bind(this);
         this.onWeightSumbition = this.onWeightSumbition.bind(this);
+        this.getCurrChallenge= this.getCurrChallenge.bind(this);
+        this.getCurrConsumption= this.getCurrConsumption.bind(this);
+        this.getCurrWeight= this.getCurrWeight.bind(this);
+
+        this.getCurrChallenge();
+        this.getCurrConsumption();
+        this.getCurrWeight();
+
 
     }
 
-
+    //when a search is launch call the api to get resulting food
     searchCallback() {
         fetch("http://localhost/API/food/" + this.state.searchValue)
             .then((res) => {
@@ -58,18 +70,21 @@ export default class mainChallenge extends Component {
             .catch((err) => console.log(err));
     }
 
+    //when text is inputed into the search bar
     onTextChange(e) {
         this.setState({
             searchValue: e
         });
     }
 
+    //when a portion is added on the detail food card, to be added to the diet
     onPortionChange(e) {
         this.setState({
             Portions: e
         });
     }
 
+    //call api to register new weight submition
     onWeightSumbition(e) {
         fetch('http://localhost/myWeight/' + this.props.idUser + '/' + e, {
             method: 'POST',
@@ -87,6 +102,7 @@ export default class mainChallenge extends Component {
         });
     }
 
+    //when  a new day submition is made, a new challenge must be created and a new consumption blank, update state
     onSubmitNewDay(state) {
         fetch('http://localhost/myChallenge/' + this.props.idUser, {
             method: 'POST',
@@ -126,7 +142,56 @@ export default class mainChallenge extends Component {
             }
         )
     }
+    //get last recorded weight from db
+    getCurrWeight(){
+        fetch("http://localhost/API/myWeight/last/" + this.props.idUser)
+            .then((res) => {
+                return res.json();
+            })
+            .then((w) => {
+                this.setState({weight: w});
+            })
+            .catch((err) => console.log(err));
+    }
 
+    //get last recorded challenge from db
+    getCurrChallenge(){
+        fetch("http://localhost/API/myChallenge/last/" + this.props.idUser)
+            .then((res) => {
+                return res.json();
+            })
+            .then((chall) => {
+                this.setState({
+                    kcals:{total: chall.kcals},
+                    protein:{total: chall.protein},
+                    fat:{total : chall.fat},
+                    fiber:{total: chall.fiber},
+                    carbohydrates:{total : chall.carbohydrates}
+                });
+            })
+            .catch((err) => console.log(err));
+    }
+
+    //get last recorded consumption from db
+    getCurrConsumption(){
+        fetch("http://localhost/API/myConsumption/last/" + this.props.idUser)
+            .then((res) => {
+                return res.json();
+            })
+            .then((cons) => {
+                this.setState({
+                    kcals:{actual: cons.kcals},
+                    protein:{actual: cons.protein},
+                    fat:{actual : cons.fat},
+                    fiber:{actual: cons.fiber},
+                    carbohydrates:{actual : cons.carbohydrates}
+                });
+            })
+            .catch((err) => console.log(err));
+
+    }
+
+    //handler for when a food card is selected to see detail
     handleCardClick(id) {
         fetch("http://localhost/API/food/nutrition/" + id)
             .then((res) => {

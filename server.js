@@ -156,8 +156,21 @@ app.get("/API/myWeight/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+app.get("/API/myWeight/last/:userId", function (req, res) {
+    // search db if user already has a document of weights add value
 
-app.get("/API/myChallenge/:userId", function (req, res) {
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        CRUD.getLastWeight(db, function (w) {
+            db.close();
+            res.send(w);
+        }, Number(req.params.userId));
+    });
+});
+
+app.get("/API/myChallenge/last/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -184,7 +197,7 @@ app.post("/API/myChallenge/:userId", function (req, res) {
     });
 });
 
-app.get("/API/myConsumption/:userId", function (req, res) {
+app.get("/API/myConsumption/last/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -200,16 +213,11 @@ app.get("/API/myConsumption/:userId", function (req, res) {
 
 app.post("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption add value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send(Response.error());
-        console.log("wrong formulated API petition");
-        return;
-    }
 
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
-        CRUD.insertChallenge(db, function (weights) {
+        CRUD.insertConsumption(db, function (weights) {
             db.close();
             res.send(weights);
         }, Number(req.params.userId), req.body);
@@ -223,4 +231,11 @@ app.listen(process.env.PORT || 80, () => {
 });
 
 
-
+/*
+MongoClient.connect(DBurl, function (err, db) {
+    assert.equal(null, err);
+    CRUD.dropCollections(db, function(){
+        console.log("All collections droped");
+    })
+});
+*/

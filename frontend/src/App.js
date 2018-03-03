@@ -5,6 +5,10 @@ import About from "./About";
 import Login from "./Login";
 import Stats from "./Stats";
 
+/**
+ * This class contains all the components needed to display the whole application.
+ */
+
 class App extends Component {
 
   constructor(props) {

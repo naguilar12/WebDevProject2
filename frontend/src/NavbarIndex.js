@@ -3,6 +3,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/NavbarIndex.css"
 import registerServiceWorker from "./registerServiceWorker";
 
+/**
+ * This class contains all needed to display the nav bar on top.
+ */
 export default class NavbarIndex extends Component{
     constructor(props) {
         super(props);

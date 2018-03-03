@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-
+/**
+ * This class renders a modal that allows to enter new weights
+ */
 export default class WeightModal extends Component{
     constructor(props) {
         super(props);
@@ -23,6 +25,7 @@ export default class WeightModal extends Component{
     onClick(){
         this.props.onClick(this.state.weight);
     }
+
     render() {
         let actual=<span></span>;
         if (this.props.weight){
