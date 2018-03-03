@@ -8,7 +8,7 @@
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
     "react-transition-group": "^2.2.1",
-    "reactstrap": "^4.8.0"
+    "recharts": "^1.0.0-beta.10"
   },
   "scripts": {
     "start": "react-scripts start",

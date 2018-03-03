@@ -20,7 +20,6 @@ export default class NavbarIndex extends Component{
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
                 <a className="navbar-brand" onClick={this.state.onChange.bind(this,"index")}><img className="img-responsive" id="navbar_logo"
                                                                src={"/resources/diet_advisor_logo.png"}
                                                                alt="diet_advisor_logo" /></a>

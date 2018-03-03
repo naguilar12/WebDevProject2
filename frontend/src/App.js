@@ -4,6 +4,7 @@ import NavBar from './NavbarIndex';
 import MainChallenge from './Challenge';
 import About from "./About";
 import Login from "./Login";
+import Stats from "./Stats";
 
 class App extends Component {
 
@@ -25,6 +26,9 @@ class App extends Component {
       let main=null;
       if (this.state.location === 'index'){
           main = <About/>;
+      }
+      else if(this.state.location === 'stats'){
+          main = <Stats/>;
       }
       else if(this.state.location==='challenge'){
           main = <MainChallenge/>;
