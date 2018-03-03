@@ -1,4 +1,4 @@
-const assert = require('assert');
+ const assert = require('assert');
 exports.insertWeight = function (db, callback, userId, weight) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -212,6 +212,7 @@ exports.getWeights = function (db, callback, userId) {
         callback(docs);
     });
 };
+
 exports.getChallenges = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
