@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import NavBar from './NavbarIndex';
 import MainChallenge from './Challenge';
 import About from "./About";
@@ -42,7 +41,7 @@ class App extends Component {
           <div>
             <NavBar onChange={this.callbackNavbar}/>
           </div>
-          <div>
+          <div className="container-fluid scroll">
           {main}
           </div>
       </div>
