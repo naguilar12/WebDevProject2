@@ -7,16 +7,11 @@ export default class NavbarIndex extends Component{
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            onChange: props.onChange
         };
     }
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+
     render(){
         return(
             <nav className="navbar navbar-inverse navbar-toggleable-md fixed-top">
@@ -26,26 +21,26 @@ export default class NavbarIndex extends Component{
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <a className="navbar-brand" href="index.html"><img className="img-responsive" id="navbar_logo"
+                <a className="navbar-brand" onClick={this.state.onChange.bind(this,"index")}><img className="img-responsive" id="navbar_logo"
                                                                src={"/resources/diet_advisor_logo.png"}
                                                                alt="diet_advisor_logo" /></a>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li id="home-option" className="nav-item center-items">
-                            <a id="home-link" className="nav-link">
+                            <a id="home-link" className="nav-link" onClick={this.state.onChange.bind(this,"index")}>
                                 <i className="fa fa-home"></i><br/>
                                 Home
                             </a>
                         </li>
                         <li id="my-stats-option" className="nav-item center-items">
-                            <a id="my-stats-link" className="nav-link" href="stats.html">
+                            <a id="my-stats-link" className="nav-link" onClick={this.state.onChange.bind(this,"stats")}>
                                 <i className="fa fa-line-chart"></i><br/>
                                 My Stats
                             </a>
                         </li>
                         <li id="challenge-option" className="nav-item center-items">
-                            <a id="challenge-link" className="nav-link" href="challenge.html">
+                            <a id="challenge-link" className="nav-link" onClick={this.state.onChange.bind(this,"challenge")}>
                                 <i className="fa fa-cutlery"></i><br/>
                                 Challenge
                             </a>
