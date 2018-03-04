@@ -16,7 +16,7 @@ exports.insertWeight = function (db, callback, userId, weight) {
                 dates = docs[0].dates;
             }
             let todate = new Date();
-            todate = todate / 3600000
+            todate = todate / 3600000;
             if (dates && dates.length > 0) {
                 let date = dates[dates.length - 1];
                 if (todate - date < 20) {
@@ -464,9 +464,9 @@ exports.weightDifference = function (db, callback, userId) {
                     }
                     counter += 1;
                 });
-                previous = previous/5;
-                last= last/5;
-                let result = last-previous;
+                previous = previous / 5;
+                last = last / 5;
+                let result = last - previous;
                 let w = weights[weights.length - 1];
                 console.log(result);
                 callback(JSON.stringify(result));
