@@ -10,7 +10,6 @@ import Stats from "./Stats";
 import Base64 from "base-64";
 import Utf8 from "utf8";
 
-process.env.PAGE_URL = "http://diet-advisor.herokuapp.com";
 
 /**
  * This class contains all the components needed to display the whole application.
@@ -49,7 +48,7 @@ class App extends Component {
         let bytes = Utf8.encode(value);
         let encoded = Base64.encode(bytes);
         console.log("login attempt");
-        fetch(process.env.PAGE_URL+"/API/login/" + encoded)
+        fetch("/API/login/" + encoded)
             .then(res => {
                 return (res.json());
             })
@@ -71,7 +70,7 @@ class App extends Component {
         let value = name + ";;;" + email + ";;;" + password;
         let bytes = Utf8.encode(value);
         let encoded = Base64.encode(bytes);
-        fetch(process.env.PAGE_URL+"/API/signin/" + encoded)
+        fetch("/API/signin/" + encoded)
             .then((res) => {
                 return (res.json());
             })
