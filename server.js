@@ -242,12 +242,13 @@ app.get("/API/login/:userData", (req, res)=>{
             return;
         }
         let user = null;
-        if(rows[0].PASSWORD===params[1]){
+        if(rows[0].PASSWORD===params[1]) {
             user = {
                 id: rows[0].ID,
                 name: rows[0].NAME,
                 email: params[0]
             }
+            console.log("login success");
         }
         res.send(user);
     });

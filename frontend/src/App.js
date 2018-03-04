@@ -20,14 +20,17 @@ class App extends Component {
         super(props);
 
         this.state = {
-            navbar: 'user',
+            navbar: 'index',
             locationUser: 'challenge',
-            location: 'challenge',
-            idUser: 1,
+            location: 'about',
+            idUser: null,
             userName: null,
             userMail: null,
         };
         this.callbackNavbar = this.callbackNavbar.bind(this);
+        this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
+        this.onSubmitLogin = this.onSubmitLogin.bind(this);
+        this.onSubmitSignin = this.onSubmitSignin.bind(this);
     }
 
     callbackNavbar(value) {
@@ -42,20 +45,21 @@ class App extends Component {
         let value = email + ";;;" + password;
         let bytes = Utf8.encode(value);
         let encoded = Base64.encode(bytes);
+        console.log("login attempt");
         fetch("http://localhost/API/login/" + encoded)
-            .then((res) => {
-                console.log(res);
+            .then(res => {
                 return (res.json());
             })
-            .then((user) => {
-                if(user!==null && user!==undefined){
-                    this.setState({
-                        idUser : user.id,
-                        userName : user.name,
-                        userMail : user.email,
-                        navbar : 'user',
-                    });
-                }
+            .then(user => {
+                this.setState((prevState) => {
+                        return {
+                            idUser: user.id,
+                            userName: user.name,
+                            userMail: user.email,
+                            navbar: 'user',
+                        };
+                    }
+                );
             })
             .catch((err) => console.log(err));
     }
@@ -69,14 +73,15 @@ class App extends Component {
                 return (res.json());
             })
             .then((user) => {
-                if(user!==null && user!==undefined){
-                    this.setState({
-                        idUser : user.id,
-                        userName : user.name,
-                        userMail : user.email,
-                        navbar : 'user',
-                    });
-                }
+                this.setState((prevState) => {
+                        return {
+                            idUser: user.id,
+                            userName: user.name,
+                            userMail: user.email,
+                            navbar: 'user',
+                        };
+                    }
+                );
             })
             .catch((err) => console.log(err));
     }
@@ -97,7 +102,7 @@ class App extends Component {
             }
         }
         else {
-            navbar = <NavBarUser onChange={this.callbackUserNavbar}/>;
+            navbar = <NavBarUser onChange={this.callbackUserNavbar} userName={this.state.userName}/>;
             if (this.state.locationUser === 'index') {
                 main = <About/>;
             }

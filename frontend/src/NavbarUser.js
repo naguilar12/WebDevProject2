@@ -8,6 +8,7 @@ export default class NavbarUser extends Component{
         super(props);
 
         this.state = {
+            userName: props.userName,
             onChange: props.onChange
         };
     }
@@ -47,7 +48,7 @@ export default class NavbarUser extends Component{
                         <li id="user-option" className="nav-item  center-items">
                             <a className="nav-link dropdown-toggle user-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="fa fa-user-circle"></i><br/>
-                                Name
+                                {this.state.userName}
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a className="dropdown-item" >

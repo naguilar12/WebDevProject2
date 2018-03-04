@@ -23,6 +23,7 @@ export default class Login extends Component {
     }
 
     handleSubmit = event => {
+        event.preventDefault();
         this.state.onSubmit(this.state.email,this.state.password);
     }
 
