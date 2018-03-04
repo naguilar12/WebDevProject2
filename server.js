@@ -224,6 +224,19 @@ app.post("/API/myConsumption/:userId", function (req, res) {
     });
 });
 
+app.put("/API/myConsumption/:userId", function (req, res) {
+    // search db if user already has a document of consumption add value
+
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        CRUD.updateConsumption(db, function (weights) {
+            db.close();
+            res.send(weights);
+        }, Number(req.params.userId), req.body);
+    });
+});
+
 
 
 app.listen(process.env.PORT || 80, () => {

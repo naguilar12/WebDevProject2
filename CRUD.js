@@ -193,6 +193,81 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
     }
 
 };
+exports.updateConsumption = function (db, callback, userId, consumption) {
+    const dbase = db.db("nutrition"); //here
+    // Get the documents collection
+    let collection = dbase.collection("consumptions");
+    try {
+        collection.find({'userId': userId}).toArray(function (err, docs) {
+            assert.equal(err, null);
+            console.log("Found the following records");
+            console.log(docs);
+            let consumptions = [];
+            try {
+                let newconsumption = {};
+                newconsumption.kcals = consumption.kcals;
+                newconsumption.carbohydrates = consumption.carbohydrates;
+                newconsumption.protein = consumption.protein;
+                newconsumption.fat = consumption.fiber;
+                newconsumption.fiber = consumption.fiber;
+                newconsumption.date= new Date();
+                if (docs  &&docs.length>0) {
+                    consumptions = docs[0].consumptions;
+                    newconsumption= consumptions.pop();
+                    newconsumption.kcals  += consumption.kcals;
+                    newconsumption.carbohydrates += consumption.carbohydrates;
+                    newconsumption.protein += consumption.protein;
+                    newconsumption.fat += consumption.fiber;
+                    newconsumption.fiber += consumption.fiber;
+                }
+
+                consumptions.push(newconsumption);
+                collection.updateOne({userId: userId}
+                    , {$set: {consumptions: consumptions}}, {upsert: true},
+                    function (err, result) {
+                        assert.equal(err, null);
+                        assert.equal(1, result.result.n);
+                        console.log("Added consumption");
+                        callback(result);
+                    });
+            }
+            catch (err) {
+                callback(err);
+                return;
+            }
+
+
+        });
+    }
+    catch (err) {
+        try {
+            let newconsumption = {};
+            newconsumption.kcals = consumption.kcals;
+            newconsumption.carbohydrates = consumption.carbohydrates;
+            newconsumption.protein = consumption.protein;
+            newconsumption.fat = consumption.fiber;
+            newconsumption.fiber = consumption.fiber;
+            newconsumption.date= new Date();
+            dbase.createCollection('consumptions', {size: 2148});
+            collection = dbase.collection('consumptions');
+            console.log(collection);
+            collection.updateOne({userId: userId}
+                , {$set: {consumptions: [consumption]}}, {upsert: true},
+                function (err, result) {
+                    assert.equal(err, null);
+                    assert.equal(1, result.result.n);
+                    console.log("Added consumption");
+                    callback(result);
+                });
+        }
+        catch (err) {
+            callback(err);
+        }
+
+    }
+
+};
+
 exports.indexCollections = function (db, callback) {
     const dbase = db.db("nutrition"); //here
 

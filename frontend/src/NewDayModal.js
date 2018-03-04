@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
-
+/**
+ * This class renders the modal to set the new challenge and start a new day of diet.
+ */
 export default class NewDayModal extends Component {
     constructor(props) {
         super(props);

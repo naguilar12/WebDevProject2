@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 
+/**
+ * This card renders the detailed food object for selecting and adding to the current diet day
+ */
 export default class DetailedCard extends Component {
     constructor(props){
         super(props);
-
         this.handleTextChange= this.handleTextChange.bind(this);
     }
     handleTextChange(e) {
-        this.props.onPortionChange(e.target.value);
+        if(Number(e.target.value)) {
+            this.props.onPortionChange(Number(e.target.value));
+        }
+        else{
+            this.props.onPortionChange(0);
+        }
+
 
     }
 
@@ -29,7 +37,7 @@ export default class DetailedCard extends Component {
                         <span className="col-2"></span>
                         <input type="text" value={this.props.portions} className="col-2" onChange={this.handleTextChange}/>
                         <span className="col-2"></span>
-                        <button className="btn-primary btn col-4" id='portionsTakenBut'>Submit</button>
+                        <button className="btn-primary btn col-4" id='portionsTakenBut' onClick={this.props.handleNewFood}>Submit</button>
                         <span className="col-2"></span>
                     </div>
                 </div>
