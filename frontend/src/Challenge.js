@@ -83,13 +83,13 @@ export default class mainChallenge extends Component {
     //when a portion is added on the detail food card, to be added to the diet
     onPortionChange(e) {
         this.setState({
-            Portions: e
+            portions: e
         });
     }
 
     //call api to register new weight submition
     onWeightSumbition(e) {
-        fetch('http://localhost/myWeight/' + this.props.idUser + '/' + e, {
+        fetch('http://localhost/API/myWeight/' + this.props.idUser + '/' + e, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -110,7 +110,7 @@ export default class mainChallenge extends Component {
 
     //when  a new day submition is made, a new challenge must be created and a new consumption blank, update state
     onSubmitNewDay(state) {
-        fetch('http://localhost/myChallenge/' + this.props.idUser, {
+        fetch('http://localhost/API/myChallenge/' + this.props.idUser, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -124,7 +124,7 @@ export default class mainChallenge extends Component {
                 kcals: state.kcals
             })
         });
-        fetch('http://localhost/myConsumption/' + this.props.idUser, {
+        fetch('http://localhost/API/myConsumption/' + this.props.idUser, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -224,7 +224,7 @@ export default class mainChallenge extends Component {
     //handle submiting food with certain portion
     handleNewFood() {
         this.setState((prevState) => {
-            fetch('http://localhost/myConsumption/' + this.props.idUser, {
+            fetch('http://localhost/API/myConsumption/' + this.props.idUser, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',

@@ -6,13 +6,6 @@ import React, {Component} from 'react';
 export default class NewDayModal extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            protein: props.protein,
-            kcals: props.kcals,
-            carbohydrates: props.carbohydrates,
-            fiber: props.fiber,
-            fat: props.fat
-        };
         this.handleProteinChange = this.handleProteinChange.bind(this);
         this.handleFiberChange = this.handleFiberChange.bind(this);
         this.handleFatChange = this.handleFatChange.bind(this);
@@ -102,11 +95,15 @@ export default class NewDayModal extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state);
         this.props.onSubmit(this.state);
     }
 
     render() {
+            let protein=this.props.protein;
+            let kcals=this.props.kcals;
+            let carbohydrates=this.props.carbohydrates;
+            let fiber=this.props.fiber;
+            let fat=this.props.fat;
         let recomendation = <span>Por ahora se le recomienda entrar lo que come normalmente.</span>;
 
         return (
@@ -131,17 +128,17 @@ export default class NewDayModal extends Component {
                                 </span>
                             </div>
                             <div className="row">
-                                <input className="col-2" value={this.state.protein}
+                                <input className="col-2" value={ protein}
                                        onChange={this.handleProteinChange}/>
 
-                                <input className="col-3" value={this.state.carbohydrates}
+                                <input className="col-3" value={ carbohydrates}
                                        onChange={this.handleCarbohydratesChange}/>
 
-                                <input className="col-2" value={this.state.fat}
+                                <input className="col-2" value={ fat}
                                        onChange={this.handleFatChange}/>
-                                <input className="col-2" value={this.state.fiber}
+                                <input className="col-2" value={ fiber}
                                        onChange={this.handleFiberChange}/>
-                                <input className="col-3" value={this.state.kcals} onChange={this.handleKcalsChange}/>
+                                <input className="col-3" value={ kcals} onChange={this.handleKcalsChange}/>
                             </div>
                             <div className="row">
                                 <div className="col-2">g

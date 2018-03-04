@@ -9,6 +9,7 @@ export default class DetailedCard extends Component {
         this.handleTextChange= this.handleTextChange.bind(this);
     }
     handleTextChange(e) {
+
         if(Number(e.target.value)) {
             this.props.onPortionChange(Number(e.target.value));
         }
@@ -35,7 +36,7 @@ export default class DetailedCard extends Component {
                     </div>
                     <div className="row">
                         <span className="col-2"></span>
-                        <input type="text" value={this.props.portions} className="col-2" onChange={this.handleTextChange}/>
+                        <input type="text"  className="col-2" value={this.props.portions} onChange={this.handleTextChange}/>
                         <span className="col-2"></span>
                         <button className="btn-primary btn col-4" id='portionsTakenBut' onClick={this.props.handleNewFood}>Submit</button>
                         <span className="col-2"></span>
