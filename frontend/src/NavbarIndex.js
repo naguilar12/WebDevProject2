@@ -23,11 +23,10 @@ export default class NavbarIndex extends Component{
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <a className="navbar-brand" onClick={this.state.onChange.bind(this,"about")}><img className="img-responsive" id="navbar_logo"
-                                                               src={"/resources/diet_advisor_logo.png"}
-                                                               alt="diet_advisor_logo" /></a>
-
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <a className="navbar-brand" onClick={this.state.onChange.bind(this,"about")}><img className="img-responsive" id="navbar_logo"
+                                                                                                      src={"/resources/diet_advisor_logo.png"}
+                                                                                                      alt="diet_advisor_logo" /></a>
                     <ul className="navbar-nav ml-auto">
                         <li id="home-option" className="nav-item center-items">
                             <a id="home-link" className="nav-link" onClick={this.state.onChange.bind(this,"about")}>
