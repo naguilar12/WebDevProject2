@@ -19,8 +19,8 @@ class App extends Component {
         super(props);
 
         this.state = {
-            navbar: 'index',
-            locationUser: 'index',
+            navbar: 'user',
+            locationUser: 'challenge',
             location: 'challenge',
             idUser: 1,
         };

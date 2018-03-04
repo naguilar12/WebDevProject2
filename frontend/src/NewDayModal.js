@@ -104,30 +104,30 @@ export default class NewDayModal extends Component {
             let carbohydrates=this.props.carbohydrates;
             let fiber=this.props.fiber  ;
             let fat=this.props.fat -(this.props.weight*2-this.props.protein)*4/9;
-        let recomendation = <span>We recommend eating twice the protein in grams for your weight in kg.</span>;
+        let recomendation = <span>We recommend eating about 2.0 grams of protein per kg of weight.</span>;
         if (this.props.weightDifference){
             if(this.props.weightDifference>0.5){
-                recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+                recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 if you want to gain weight decrease {kcals*0.1/4} g of carbohydrates, if you want to lose weight decrease {kcals*0.2/4} g of carbohydrates.</span>);
             }
             else if(this.props.weightDifference>0.1){
-                recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+                recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 if you want to gain weight increase {kcals*0.1/4} g of carbohydrates, if you want to lose weight decrease {kcals*0.1/4} g of carbohydrates.</span>);
             }
             else if(this.props.weightDifference<-0.2){
-                recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+                recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 if you want to gain weight increase {kcals*0.2/4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
             else if(this.props.weightDifference<-0.45){
-                recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+                recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 if you want to gain weight increase {kcals*0.25/4} g of carbohydrates, if you want to lose weight increase {kcals*0.1/4} g of carbohydrates.</span>);
             }
             else{
-                recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+                recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 if you want to gain weight increase {kcals*0.1/4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
         }else{
-            recomendation = (<span>We recommend eating twice the protein in grams for your weight in kg.
+            recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 And keep eating the same calories.</span>);
         }
 
