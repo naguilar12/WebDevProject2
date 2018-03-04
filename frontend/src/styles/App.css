@@ -149,6 +149,7 @@ Content Adjustment Styles
 
 .chart-content{
     height: 100%;
+    margin: 20px;
 }
 
 h1{
