@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 export default class StatsChart extends Component{
-    constructor(props) {
-        super(props);
-
-    }
-
     render() {
         return (
             <div className="row justify-content-around center-items">

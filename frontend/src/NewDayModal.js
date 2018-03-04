@@ -21,8 +21,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     protein: val,
-                    kcals: prevState.kcals + val * 4 - prevState.protein*4,
-                    fiber: prevState.fiber + (val * 4 - prevState.protein*4) / 1000 * 15
+                    kcals: prevState.kcals + val * 4 - prevState.protein * 4,
+                    fiber: prevState.fiber + (val * 4 - prevState.protein * 4) / 1000 * 15
                 }
             });
         }
@@ -53,8 +53,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     carbohydrates: val,
-                    kcals: prevState.kcals + val * 4- prevState.carbohydrates*4,
-                    fiber: prevState.fiber + (val * 4- prevState.carbohydrates*4) / 1000 * 15
+                    kcals: prevState.kcals + val * 4 - prevState.carbohydrates * 4,
+                    fiber: prevState.fiber + (val * 4 - prevState.carbohydrates * 4) / 1000 * 15
                 }
             });
         }
@@ -70,8 +70,8 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     fat: val,
-                    kcals: prevState.kcals + val * 9 - prevState.fat*9,
-                    fiber: prevState.fiber + (val * 9- prevState.fat*9) / 1000 * 15
+                    kcals: prevState.kcals + val * 9 - prevState.fat * 9,
+                    fiber: prevState.fiber + (val * 9 - prevState.fat * 9) / 1000 * 15
                 }
             });
         }
@@ -99,34 +99,34 @@ export default class NewDayModal extends Component {
     }
 
     render() {
-            let protein=this.props.weight*2;
-            let kcals=this.props.kcals ;
-            let carbohydrates=this.props.carbohydrates;
-            let fiber=this.props.fiber  ;
-            let fat=this.props.fat -(this.props.weight*2-this.props.protein)*4/9;
+        let protein = this.props.weight * 2;
+        let kcals = this.props.kcals;
+        let carbohydrates = this.props.carbohydrates;
+        let fiber = this.props.fiber;
+        let fat = this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9;
         let recomendation = <span>We recommend eating about 2.0 grams of protein per kg of weight.</span>;
-        if (this.props.weightDifference){
-            if(this.props.weightDifference>0.5){
+        if (this.props.weightDifference) {
+            if (this.props.weightDifference > 0.5) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight decrease {kcals*0.1/4} g of carbohydrates, if you want to lose weight decrease {kcals*0.2/4} g of carbohydrates.</span>);
+                if you want to gain weight decrease {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {kcals * 0.2 / 4} g of carbohydrates.</span>);
             }
-            else if(this.props.weightDifference>0.1){
+            else if (this.props.weightDifference > 0.1) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals*0.1/4} g of carbohydrates, if you want to lose weight decrease {kcals*0.1/4} g of carbohydrates.</span>);
+                if you want to gain weight increase {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {kcals * 0.1 / 4} g of carbohydrates.</span>);
             }
-            else if(this.props.weightDifference<-0.2){
+            else if (this.props.weightDifference < -0.2) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals*0.2/4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
+                if you want to gain weight increase {kcals * 0.2 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
-            else if(this.props.weightDifference<-0.45){
+            else if (this.props.weightDifference < -0.45) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals*0.25/4} g of carbohydrates, if you want to lose weight increase {kcals*0.1/4} g of carbohydrates.</span>);
+                if you want to gain weight increase {kcals * 0.25 / 4} g of carbohydrates, if you want to lose weight increase {kcals * 0.1 / 4} g of carbohydrates.</span>);
             }
-            else{
+            else {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals*0.1/4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
+                if you want to gain weight increase {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
-        }else{
+        } else {
             recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
                 And keep eating the same calories.</span>);
         }
@@ -153,17 +153,17 @@ export default class NewDayModal extends Component {
                                 </span>
                             </div>
                             <div className="row">
-                                <input className="col-2" value={ protein}
+                                <input className="col-2" value={protein}
                                        onChange={this.handleProteinChange}/>
 
-                                <input className="col-3" value={ carbohydrates}
+                                <input className="col-3" value={carbohydrates}
                                        onChange={this.handleCarbohydratesChange}/>
 
-                                <input className="col-2" value={ fat}
+                                <input className="col-2" value={fat}
                                        onChange={this.handleFatChange}/>
-                                <input className="col-2" value={ fiber}
+                                <input className="col-2" value={fiber}
                                        onChange={this.handleFiberChange}/>
-                                <input className="col-3" value={ kcals} onChange={this.handleKcalsChange}/>
+                                <input className="col-3" value={kcals} onChange={this.handleKcalsChange}/>
                             </div>
                             <div className="row">
                                 <div className="col-2">g

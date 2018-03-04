@@ -47,7 +47,7 @@ class App extends Component {
         let bytes = Utf8.encode(value);
         let encoded = Base64.encode(bytes);
         console.log("login attempt");
-        fetch("http://localhost/API/login/" + encoded)
+        fetch("/API/login/" + encoded)
             .then(res => {
                 return (res.json());
             })
@@ -69,7 +69,7 @@ class App extends Component {
         let value = name + ";;;" + email + ";;;" + password;
         let bytes = Utf8.encode(value);
         let encoded = Base64.encode(bytes);
-        fetch("http://localhost/API/signin/" + encoded)
+        fetch("/API/signin/" + encoded)
             .then((res) => {
                 return (res.json());
             })

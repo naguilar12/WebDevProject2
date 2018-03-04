@@ -15,21 +15,12 @@ process.env.JAWSDB_URL = "mysql://vp7576quty8bgs0a:k9w4gtwjo0sh4jsn@cig4l2op6r0f
 // Connection URL
 const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
 
-// Database Name
-const dbName = 'nutrition';
 
 //Uses static directory "public"
 //app.use(express.static("public"));
 app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "frontend/build")));
-
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 
 //search for a food obj
@@ -41,10 +32,10 @@ app.get("/API/food/:name", function (req, res) {
                 console.log(error);
             }
             if (!error && response.statusCode == 200) {
-                if(JSON.parse(body).list) {
+                if (JSON.parse(body).list) {
                     res.send(JSON.parse(body).list.item);
                 }
-                else{
+                else {
                     res.send([]);
                 }
             }
@@ -63,25 +54,25 @@ app.get("/API/food/nutrition/:id", function (req, res) {
             }
             if (!error && response.statusCode == 200) {
                 let food = JSON.parse(body).foods[0].food;
-                item=null;
-                let kcals,protein,fat,carbohydrates,fiber;
-                if(food){
-                    food.nutrients.forEach((n)=>{
-                       if (n.name==="Energy") {
-                           kcals = n.value;
-                       }
-                       else if(n.name==="Protein"){
-                           protein = n.value;
-                       }
-                       else if(n.name === "Total lipid (fat)"){
-                           fat= n.value;
-                       }
-                       else if(n.name === "Carbohydrate, by difference"){
-                           carbohydrates = n.value;
-                       }
-                       else if ( n.name === "Fiber, total dietary"){
-                           fiber = n.value;
-                       }
+                item = null;
+                let kcals, protein, fat, carbohydrates, fiber;
+                if (food) {
+                    food.nutrients.forEach((n) => {
+                        if (n.name === "Energy") {
+                            kcals = n.value;
+                        }
+                        else if (n.name === "Protein") {
+                            protein = n.value;
+                        }
+                        else if (n.name === "Total lipid (fat)") {
+                            fat = n.value;
+                        }
+                        else if (n.name === "Carbohydrate, by difference") {
+                            carbohydrates = n.value;
+                        }
+                        else if (n.name === "Fiber, total dietary") {
+                            fiber = n.value;
+                        }
                     });
                     item = {
                         name: food.desc.name,
@@ -229,20 +220,20 @@ app.put("/API/myConsumption/:userId", function (req, res) {
     });
 });
 
-app.get("/API/login/:userData", (req, res)=>{
+app.get("/API/login/:userData", (req, res) => {
     let encoded = req.params.userData;
     let decoded = base64.decode(encoded);
     let params = utf8.decode(decoded).split(";;;");
 
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
-    connection.query('SELECT * FROM USERS WHERE EMAIL=\''+params[0]+'\';', (err, rows, fields) =>{
-        if(err){
+    connection.query('SELECT * FROM USERS WHERE EMAIL=\'' + params[0] + '\';', (err, rows, fields) => {
+        if (err) {
             console.log(err);
             return;
         }
         let user = null;
-        if(rows[0].PASSWORD===params[1]) {
+        if (rows[0].PASSWORD === params[1]) {
             user = {
                 id: rows[0].ID,
                 name: rows[0].NAME,
@@ -255,7 +246,7 @@ app.get("/API/login/:userData", (req, res)=>{
     connection.end();
 });
 
-app.get("/API/signin/:userData", (req, res)=>{
+app.get("/API/signin/:userData", (req, res) => {
     let encoded = req.params.userData;
     let decoded = base64.decode(encoded);
     let params = utf8.decode(decoded).split(";;;");
@@ -280,14 +271,14 @@ app.get("/API/signin/:userData", (req, res)=>{
                 id: rows[0].ID,
                 name: rows[0].NAME,
                 email: params[1]
-            }
+            };
 
             res.send(user);
         });
-    }catch(err){
+    } catch (err) {
         console.log(err);
         res.send(err);
-    }finally{
+    } finally {
         connection.end();
     }
 

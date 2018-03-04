@@ -23,7 +23,7 @@ export default class Stats extends Component{
     }
 
     dataCallback(userid){
-        fetch("http://localhost/API/myWeight/"+userid)
+        fetch("/API/myWeight/"+userid)
             .then((res)=>{
                 return res.json();
             })

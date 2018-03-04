@@ -64,7 +64,7 @@ export default class mainChallenge extends Component {
 
     //get weight difference to make recomendations
     getWeightDifference(){
-        fetch("http://localhost/API/myWeight/difference" + this.props.idUser)
+        fetch("/API/myWeight/difference" + this.props.idUser)
             .then((res) => {
                 return (res.json());
             })
@@ -76,7 +76,7 @@ export default class mainChallenge extends Component {
 
     //when a search is launch call the api to get resulting food
     searchCallback() {
-        fetch("http://localhost/API/food/" + this.state.searchValue)
+        fetch("/API/food/" + this.state.searchValue)
             .then((res) => {
                 return (res.json());
             })
@@ -102,7 +102,7 @@ export default class mainChallenge extends Component {
 
     //call api to register new weight submition
     onWeightSumbition(e) {
-        fetch('http://localhost/API/myWeight/' + this.props.idUser + '/' + e, {
+        fetch('/API/myWeight/' + this.props.idUser + '/' + e, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -123,7 +123,7 @@ export default class mainChallenge extends Component {
 
     //when  a new day submition is made, a new challenge must be created and a new consumption blank, update state
     onSubmitNewDay(state) {
-        fetch('http://localhost/API/myChallenge/' + this.props.idUser, {
+        fetch('/API/myChallenge/' + this.props.idUser, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -137,7 +137,7 @@ export default class mainChallenge extends Component {
                 kcals: state.kcals
             })
         });
-        fetch('http://localhost/API/myConsumption/' + this.props.idUser, {
+        fetch('/API/myConsumption/' + this.props.idUser, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -171,7 +171,7 @@ export default class mainChallenge extends Component {
 
     //get last recorded weight from db
     getCurrWeight() {
-        fetch("http://localhost/API/myWeight/last/" + this.props.idUser)
+        fetch("/API/myWeight/last/" + this.props.idUser)
             .then((res) => {
                 return (res.json());
             })
@@ -183,7 +183,7 @@ export default class mainChallenge extends Component {
 
     //get last recorded challenge from db
     getCurrChallenge() {
-        fetch("http://localhost/API/myChallenge/last/" + this.props.idUser)
+        fetch("/API/myChallenge/last/" + this.props.idUser)
             .then((res) => {
                 return (res.json());
             })
@@ -203,7 +203,7 @@ export default class mainChallenge extends Component {
 
     //get last recorded consumption from db
     getCurrConsumption() {
-        fetch("http://localhost/API/myConsumption/last/" + this.props.idUser)
+        fetch("/API/myConsumption/last/" + this.props.idUser)
             .then((res) => {
                 return (res.json());
             })
@@ -224,7 +224,7 @@ export default class mainChallenge extends Component {
 
     //handler for when a food card is selected to see detail
     handleCardClick(id) {
-        fetch("http://localhost/API/food/nutrition/" + id)
+        fetch("/API/food/nutrition/" + id)
             .then((res) => {
                 return (res.json());
             })
@@ -237,7 +237,7 @@ export default class mainChallenge extends Component {
     //handle submiting food with certain portion
     handleNewFood() {
         this.setState((prevState) => {
-            fetch('http://localhost/API/myConsumption/' + this.props.idUser, {
+            fetch('/API/myConsumption/' + this.props.idUser, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
