@@ -7,7 +7,8 @@ export default class Login extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            onSubmit: this.props.onSubmit,
         };
     }
 
@@ -22,16 +23,16 @@ export default class Login extends Component {
     }
 
     handleSubmit = event => {
-        event.preventDefault();
+        this.state.onSubmit(this.state.email,this.state.password);
     }
 
     render() {
         return (
             <div className="container-fluid banner">
                 <div className="row justify-content-around banner-content center-items">
-                    <form onSubmit={this.handleSubmit} className="col-4 center-items">
+                    <form onSubmit={this.handleSubmit} className="col-6 center-items">
                         <FormGroup controlId="email" bsSize="large">
-                            <ControlLabel>Email</ControlLabel>
+                            <ControlLabel className="auth-text">Email</ControlLabel>
                             <FormControl
                                 autoFocus
                                 type="email"
@@ -40,7 +41,7 @@ export default class Login extends Component {
                             />
                         </FormGroup>
                         <FormGroup controlId="password" bsSize="large">
-                            <ControlLabel>Password</ControlLabel>
+                            <ControlLabel className="auth-text">Password</ControlLabel>
                             <FormControl
                                 value={this.state.password}
                                 onChange={this.handleChange}

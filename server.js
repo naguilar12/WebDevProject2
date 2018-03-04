@@ -1,13 +1,16 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
+const mysql = require('mysql');
 const assert = require('assert');
 const request = require('request');
 const CRUD = require("./CRUD");
-const cookieParser = require("cookie-parser");
 const path = require("path");
 const app = express();
 const bodyParser = require('body-parser');
+const utf8 = require("utf8");
+const base64 = require("base-64");
 
+process.env.JAWSDB_URL = "mysql://vp7576quty8bgs0a:k9w4gtwjo0sh4jsn@cig4l2op6r0fxymw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/unhl405k407wjdze";
 
 // Connection URL
 const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
@@ -19,7 +22,6 @@ const dbName = 'nutrition';
 //app.use(express.static("public"));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(function(req, res, next) {
@@ -237,7 +239,62 @@ app.put("/API/myConsumption/:userId", function (req, res) {
     });
 });
 
+app.get("/API/login/:userData", (req, res)=>{
+    let encoded = req.params.userData;
+    let decoded = base64.decode(encoded);
+    let params = utf8.decode(decoded).split(";;;");
 
+    var connection = mysql.createConnection(process.env.JAWSDB_URL);
+    connection.connect();
+    connection.query('SELECT * FROM USERS WHERE EMAIL=\''+params[0]+'\';', (err, rows, fields) =>{
+        if(err){
+            console.log(err);
+            return;
+        }
+        let user = null;
+        if(rows[0].PASSWORD===params[1]){
+            user = {
+                id: rows[0].ID,
+                name: rows[0].NAME,
+                email: params[0]
+            }
+        }
+        res.send(user);
+    });
+    connection.end();
+});
+
+app.get("/API/signin/:userData", (req, res)=>{
+    let encoded = req.params.userData;
+    let decoded = base64.decode(encoded);
+    let params = utf8.decode(decoded).split(";;;");
+
+    var connection = mysql.createConnection(process.env.JAWSDB_URL);
+    connection.connect();
+    connection.query('INSERT INTO USERS (NAME, EMAIL, PASSWORD) ' +
+        'VALUES (\''+params[0]+'\',\''+params[1]+'\',\''+params[2]+'\');', (err, rows, fields) =>{
+        if(err){
+            console.log(err);
+            return;
+        }
+
+        connection.query('SELECT ID, NAME FROM USERS WHERE EMAIL=\''+params[1]+'\';', (err, rows, fields) =>{
+            if(err){
+                console.log(err);
+                return;
+            }
+
+            let user = {
+                id: rows[0].ID,
+                name: rows[0].NAME,
+                email: params[1]
+            }
+
+            res.send(user);
+        });
+    });
+    connection.end();
+});
 
 app.listen(process.env.PORT || 80, () => {
     console.log("Listening on :80");
