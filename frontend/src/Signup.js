@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 
-export default class Signin extends Component {
+export default class Signup extends Component {
     constructor(props) {
         super(props);
 
@@ -24,6 +24,7 @@ export default class Signin extends Component {
     }
 
     handleSubmit = event => {
+        event.preventDefault();
         this.state.onSubmit(this.state.name, this.state.email,this.state.password);
     }
 
@@ -64,7 +65,7 @@ export default class Signin extends Component {
                             disabled={!this.validateForm()}
                             type="submit"
                         >
-                            Login
+                            Sign Up
                         </Button>
                     </form>
                 </div>

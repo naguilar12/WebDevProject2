@@ -5,7 +5,7 @@ import NavBarUser from './NavbarUser';
 import MainChallenge from './Challenge';
 import About from "./About";
 import Login from "./Login";
-import Signin from "./Signin";
+import Signin from "./Signup";
 import Stats from "./Stats";
 import Base64 from "base-64";
 import Utf8 from "utf8";
@@ -31,6 +31,7 @@ class App extends Component {
         this.callbackUserNavbar = this.callbackUserNavbar.bind(this);
         this.onSubmitLogin = this.onSubmitLogin.bind(this);
         this.onSubmitSignin = this.onSubmitSignin.bind(this);
+        this.onLogout = this.onLogout.bind(this);
     }
 
     callbackNavbar(value) {
@@ -86,6 +87,18 @@ class App extends Component {
             .catch((err) => console.log(err));
     }
 
+    onLogout(){
+        this.setState((prevState) => {
+                return {
+                    idUser: null,
+                    userName: null,
+                    userMail: null,
+                    navbar: 'index',
+                };
+            }
+        );
+    }
+
     render() {
         let main = null;
         let navbar = null;
@@ -102,7 +115,8 @@ class App extends Component {
             }
         }
         else {
-            navbar = <NavBarUser onChange={this.callbackUserNavbar} userName={this.state.userName}/>;
+            navbar = <NavBarUser onChange={this.callbackUserNavbar}
+                                 userName={this.state.userName} logout={this.onLogout}/>;
             if (this.state.locationUser === 'index') {
                 main = <About/>;
             }

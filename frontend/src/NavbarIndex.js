@@ -38,7 +38,7 @@ export default class NavbarIndex extends Component{
                         <li id="signin-option" className="nav-item center-items">
                             <a id="signin-link" className="nav-link" onClick={this.state.onChange.bind(this,"signin")}>
                                 <i className="fa fa-sign-in"></i><br/>
-                                Sign In
+                                Sign Up
                             </a>
                         </li>
                         <li id="login-option" className="nav-item  center-items">

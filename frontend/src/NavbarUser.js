@@ -9,7 +9,8 @@ export default class NavbarUser extends Component{
 
         this.state = {
             userName: props.userName,
-            onChange: props.onChange
+            onChange: props.onChange,
+            logout: props.logout
         };
     }
 
@@ -51,7 +52,7 @@ export default class NavbarUser extends Component{
                                 {this.state.userName}
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" >
+                                <a className="dropdown-item" onClick={this.state.logout}>
                                     <i className="fa fa-power-off"></i>  Logout
                                 </a>
                             </div>

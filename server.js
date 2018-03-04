@@ -262,15 +262,16 @@ app.get("/API/signin/:userData", (req, res)=>{
 
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
-    connection.query('INSERT INTO USERS (NAME, EMAIL, PASSWORD) ' +
-        'VALUES (\''+params[0]+'\',\''+params[1]+'\',\''+params[2]+'\');', (err, rows, fields) =>{
-        if(err){
-            console.log(err);
-            return;
-        }
-
-        connection.query('SELECT ID, NAME FROM USERS WHERE EMAIL=\''+params[1]+'\';', (err, rows, fields) =>{
-            if(err){
+    try {
+        connection.query('INSERT INTO USERS (NAME, EMAIL, PASSWORD) ' +
+            'VALUES (\'' + params[0] + '\',\'' + params[1] + '\',\'' + params[2] + '\');', (err, rows, fields) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+        });
+        connection.query('SELECT ID, NAME FROM USERS WHERE EMAIL=\'' + params[1] + '\';', (err, rows, fields) => {
+            if (err) {
                 console.log(err);
                 return;
             }
@@ -283,8 +284,13 @@ app.get("/API/signin/:userData", (req, res)=>{
 
             res.send(user);
         });
-    });
-    connection.end();
+    }catch(err){
+        console.log(err);
+        res.send(err);
+    }finally{
+        connection.end();
+    }
+
 });
 
 app.listen(process.env.PORT || 80, () => {
