@@ -225,7 +225,7 @@ app.get("/API/login/:userData", (req, res) => {
     let decoded = base64.decode(encoded);
     let params = utf8.decode(decoded).split(";;;");
 
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
+    let connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     connection.query('SELECT * FROM USERS WHERE EMAIL=\'' + params[0] + '\';', (err, rows, fields) => {
         if (err) {
@@ -238,7 +238,7 @@ app.get("/API/login/:userData", (req, res) => {
                 id: rows[0].ID,
                 name: rows[0].NAME,
                 email: params[0]
-            }
+            };      
             console.log("login success");
         }
         res.send(user);

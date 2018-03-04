@@ -6,6 +6,15 @@ import React, {Component} from 'react';
 export default class NewDayModal extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            protein : props.weight * 2,
+            kcals : props.kcals,
+            carbohydrates : props.carbohydrates,
+            fiber : props.fiber,
+            fat : props.fat - (props.weight * 2 - props.protein) * 4 / 9,
+            first: true
+        };
+
         this.handleProteinChange = this.handleProteinChange.bind(this);
         this.handleFiberChange = this.handleFiberChange.bind(this);
         this.handleFatChange = this.handleFatChange.bind(this);
@@ -22,12 +31,13 @@ export default class NewDayModal extends Component {
                 return {
                     protein: val,
                     kcals: prevState.kcals + val * 4 - prevState.protein * 4,
-                    fiber: prevState.fiber + (val * 4 - prevState.protein * 4) / 1000 * 15
+                    fiber: prevState.fiber + (val * 4 - prevState.protein * 4) / 1000 * 15,
+                    first: false
                 }
             });
         }
         else {
-            this.setState({protein: 0});
+            this.setState({protein: 0, first: false});
         }
 
     }
@@ -38,12 +48,13 @@ export default class NewDayModal extends Component {
             this.setState((prevState) => {
                 return {
                     kcals: val,
-                    fiber: val / 1000 * 15
+                    fiber: val / 1000 * 15,
+                    first: false
                 }
             });
         }
         else {
-            this.setState({kcals: 0, fiber: 0});
+            this.setState({kcals: 0, fiber: 0, first: false});
         }
     }
 
@@ -54,12 +65,13 @@ export default class NewDayModal extends Component {
                 return {
                     carbohydrates: val,
                     kcals: prevState.kcals + val * 4 - prevState.carbohydrates * 4,
-                    fiber: prevState.fiber + (val * 4 - prevState.carbohydrates * 4) / 1000 * 15
+                    fiber: prevState.fiber + (val * 4 - prevState.carbohydrates * 4) / 1000 * 15,
+                    first: false
                 }
             });
         }
         else {
-            this.setState({carbohydrates: 0});
+            this.setState({carbohydrates: 0, first: false});
         }
 
     }
@@ -71,26 +83,28 @@ export default class NewDayModal extends Component {
                 return {
                     fat: val,
                     kcals: prevState.kcals + val * 9 - prevState.fat * 9,
-                    fiber: prevState.fiber + (val * 9 - prevState.fat * 9) / 1000 * 15
+                    fiber: prevState.fiber + (val * 9 - prevState.fat * 9) / 1000 * 15,
+                    first: false
                 }
             });
         }
         else {
-            this.setState({fat: 0});
+            this.setState({fat: 0, first: false});
         }
     }
 
-    handleFiberChange(e) {
+        handleFiberChange(e) {
         let val = Number(e.target.value);
         if (val) {
             this.setState((prevState) => {
                 return {
-                    fiber: val
+                    fiber: val,
+                    first: false
                 }
             });
         }
         else {
-            this.setState({fiber: 0});
+            this.setState({fiber: 0, first: false});
         }
     }
 
@@ -99,11 +113,22 @@ export default class NewDayModal extends Component {
     }
 
     render() {
-        let protein = this.props.weight * 2;
-        let kcals = this.props.kcals;
-        let carbohydrates = this.props.carbohydrates;
-        let fiber = this.props.fiber;
-        let fat = this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9;
+        let protein, kcals, carbohydrates, fiber, fat;
+        if(this.state.first) {
+             protein = this.props.weight * 2;
+             kcals = this.props.kcals;
+             carbohydrates = this.props.carbohydrates;
+             fiber = this.props.fiber;
+             fat = this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9;
+        }
+        else{
+            protein = this.state.protein;
+            kcals = this.state.kcals;
+            carbohydrates = this.state.carbohydrates;
+            fiber = this.state.fiber;
+            fat = this.state.fat;
+        }
+
         let recomendation = <span>We recommend eating about 2.0 grams of protein per kg of weight.</span>;
         if (this.props.weightDifference) {
             if (this.props.weightDifference > 0.5) {
