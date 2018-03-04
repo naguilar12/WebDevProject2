@@ -15,7 +15,7 @@ body {
     padding-top: 87px; /*50px for the height of the navbar + 37px for the offset*/
     padding-bottom: 50px; /*50px for the height of the bottom navbar*/
 }
-nav {
+nav  {
     top: 37px; /*Offsets the top navbar 37px from the top of the viewport*/
 }
 

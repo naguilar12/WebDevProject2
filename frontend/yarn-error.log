@@ -24,15 +24,17 @@ npm manifest:
       "react-dom": "^16.2.0",
       "react-scripts": "1.1.1",
       "react-transition-group": "^2.2.1",
-      "recharts": "^1.0.0-beta.10"
+      "recharts": "^1.0.0-beta.10",
+      "base-64": "^0.1.0",
+      "utf8": "^3.0.0",
+      "react-bootstrap": "^0.32.1"
     },
     "scripts": {
       "start": "react-scripts start",
       "build": "react-scripts build",
       "test": "react-scripts test --env=jsdom",
       "eject": "react-scripts eject"
-    },
-    "proxy": "http://localhost:3001"
+    }
   }
 
 yarn manifest: 

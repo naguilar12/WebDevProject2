@@ -47,7 +47,7 @@ export default class mainChallenge extends Component {
         this.onPortionChange = this.onPortionChange.bind(this);
         this.handleCardClick = this.handleCardClick.bind(this);
         this.onSubmitNewDay = this.onSubmitNewDay.bind(this);
-        this.onWeightSumbition = this.onWeightSumbition.bind(this);
+        this.onWeightSubmition = this.onWeightSubmition.bind(this);
         this.getCurrChallenge = this.getCurrChallenge.bind(this);
         this.getCurrConsumption = this.getCurrConsumption.bind(this);
         this.getCurrWeight = this.getCurrWeight.bind(this);
@@ -68,8 +68,8 @@ export default class mainChallenge extends Component {
             .then((res) => {
                 return (res.json());
             })
-            .then((food) => {
-                this.setState({foods: food});
+            .then((diff) => {
+                this.setState({weightDifference: diff});
             })
             .catch((err) => console.log(err));
     }
@@ -80,8 +80,8 @@ export default class mainChallenge extends Component {
             .then((res) => {
                 return (res.json());
             })
-            .then((diff) => {
-                this.setState({weightDifference: diff});
+            .then((food) => {
+                this.setState({foods: food});
             })
             .catch((err) => console.log(err));
     }
@@ -101,7 +101,7 @@ export default class mainChallenge extends Component {
     }
 
     //call api to register new weight submition
-    onWeightSumbition(e) {
+    onWeightSubmition(e) {
         fetch('/API/myWeight/' + this.props.idUser + '/' + e, {
             method: 'POST',
             headers: {
@@ -280,7 +280,7 @@ export default class mainChallenge extends Component {
                 <CardContainer foods={this.state.foods} chosenFood={this.state.chosenFood}
                                handleCardClick={this.handleCardClick} portions={this.state.portions}
                                onPortionChange={this.onPortionChange} handleNewFood={this.handleNewFood} />
-                <WeightModal weight={this.state.weight} onClick={this.onWeightSumbition}/>
+                <WeightModal weight={this.state.weight} onClick={this.onWeightSubmition}/>
                 <NewDayModal kcals={this.state.kcals.total} protein={this.state.protein.total}
                              carbohydrates={this.state.carbohydrates.total}
                              fat={this.state.fat.total} fiber={this.state.fiber.total}

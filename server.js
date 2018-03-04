@@ -238,7 +238,7 @@ app.get("/API/login/:userData", (req, res) => {
                 id: rows[0].ID,
                 name: rows[0].NAME,
                 email: params[0]
-            };      
+            };
             console.log("login success");
         }
         res.send(user);
