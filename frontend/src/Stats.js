@@ -30,7 +30,10 @@ export default class Stats extends Component{
             .then((user)=>{
                 let i = 0;
                 user.forEach((w) => {
-                    let wei = { name: w.dates[i]*, weight: w.weights[i]};
+                    let date = new Date(w.dates[i]*1000*60*60);
+                    let format = ""+date.getDate().toString()+"/"+(date.getMonth()+1).toString()+"/"
+                        +date.getFullYear().toString().replace("20","")
+                    let wei = { name: format, weight: w.weights[i]};
                     let currState = this.state.data.slice();
                     this.setState({
                         data: currState.concat(wei)
@@ -43,7 +46,7 @@ export default class Stats extends Component{
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid center-items">
                 <StatsChart data={this.state.data}/>
             </div>
         );
