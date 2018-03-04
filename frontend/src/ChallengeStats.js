@@ -1,61 +1,64 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import ProgressBar from "./ProgressBar";
 
-
-export default class ChallengeStats extends Component{
+/**
+ * This class renders the whole section of challenge stats qhere you can see the remaining values for the day and you have access to the buttons
+ */
+export default class ChallengeStats extends Component {
     constructor(props) {
         super(props);
 
-        this.state={
-            kcals: props.kcals.actual,
-            pkcals:props.kcals.actual/props.kcals.total,
-            protein: props.protein.actual,
-            pprotein:props.protein.actual/props.protein.total,
-            fat: props.fat.actual,
-            pfat:props.fat.actual/props.fat.total,
-            fiber: props.fiber.actual,
-            pfiber:props.fiber.actual/props.fiber.total,
-            carbohydrates:props.carbohydrates.actual,
-            pcarbohydrates:props.carbohydrates.actual/props.carbohydrates.total,
-        };
+        this.state = {};
     }
+
     render() {
+        let pkcals = ((this.props.kcals.total - this.props.kcals.actual) / this.props.kcals.total * 100);
+        let pprotein = (this.props.protein.total - this.props.protein.actual) / this.props.protein.total * 100;
+        let pfat =  (this.props.fat.total - this.props.fat.actual) / this.props.fat.total * 100;
+        let pfiber =  (this.props.fiber.total - this.props.fiber.actual) / this.props.fiber.total * 100;
+        let pcarbs =  (this.props.carbohydrates.total - this.props.carbohydrates.actual) / this.props.carbohydrates.total * 100;
+
+        let kunit = "kcals";
+        let kname = "Energy";
+        let unit = "g";
+        let pname = "Protein";
+        let fibname = "Fiber";
+        let fatName = "Fat";
+        let cname = "Carbohydrates";
+
+
         return (
-        <div className="row">
-            <div className="container-fluid remainingVals col-9">
-                <div className="progress fiber">
-                    <span className="label-progress">Total Energy  </span>
-                    <div className="progress-bar" style={{width: this.state.pkcals+"%"}}>{this.state.kcals} Kcals</div>
+            <div className="row">
+                <div className="container-fluid remainingVals col-9">
+
+                    <ProgressBar unit={kunit} pVal={pkcals} total={this.props.kcals.total}
+                                 actual={this.props.kcals.actual} name={kname}/>
+                    <ProgressBar unit={unit} pVal={pcarbs} total={this.props.carbohydrates.total}
+                                 actual={this.props.carbohydrates.actual} name={cname}/>
+                    <ProgressBar unit={unit} pVal={pprotein} total={this.props.protein.total}
+                                 actual={this.props.protein.actual} name={pname}/>
+                    <ProgressBar unit={unit} pVal={pfat} total={this.props.fat.total}
+                                 actual={this.props.fat.actual} name={fatName}/>
+                    <ProgressBar unit={unit} pVal={pfiber} total={this.props.fiber.total}
+                                 actual={this.props.fiber.actual} name={fibname}/>
+
+
                 </div>
-                <div className="progress carbs">
-                    <span className="label-progress">Total Carbohydrates  </span>
-                    <div className="progress-bar" style={{width: this.state.pcarbohydrates+"%"}}>{this.state.carbohydrates} g</div>
-                </div>
-                <div className="progress protein">
-                    <span className="label-progress">Total Protein  </span>
-                    <div className="progress-bar" style={{width: this.state.pprotein+"%"}}>{this.state.protein} g</div>
-                </div>
-                <div className="progress fat">
-                    <span className="label-progress">Total Fat </span>
-                    <div className="progress-bar" style={{width: this.state.pfat+"%"}}>{this.state.fat} g</div>
-                </div>
-                <div className="progress fiber">
-                    <span className="label-progress">Total Fiber </span>
-                    <div className="progress-bar" style={{width: this.state.pfiber+"%"}}>{this.state.fiber} g</div>
-                </div>
-            </div>
-            <div className="center-items col-3">
-                <div className="buttonsDiv">
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#weightModal">
-                Register your weight
-                </button>
-                </div>
-                <div className="buttonsDiv">
-                <button type="button" className="btn btn-primary">
-                    Start A New Day
-                </button>
+                <div className="center-items col-3">
+                    <div className="buttonsDiv">
+                        <button type="button" className="btn btn-primary" data-toggle="modal"
+                                data-target="#weightModal">
+                            Register your weight
+                        </button>
+                    </div>
+                    <div className="buttonsDiv">
+                        <button type="button" className="btn btn-primary" data-toggle="modal"
+                                data-target="#newDayModal">
+                            Start A New Day
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
         );
     }

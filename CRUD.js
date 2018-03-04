@@ -9,13 +9,32 @@ exports.insertWeight = function (db, callback, userId, weight) {
             console.log("Found the following records");
             console.log(docs);
             let weights = [];
+            let dates = [];
             if (docs && docs.length>0) {
                 weights = docs[0].weights;
+                dates = docs[0].dates;
             }
-
-            weights.push(weight);
+            let todate= new Date();
+            todate= todate/3600000
+            if (dates && dates.length>0){
+                let date= dates[dates.length-1];
+                if (todate-date<20){
+                    weights.pop();
+                    weights.push(weight);
+                    dates.pop();
+                    dates.push(todate);
+                }
+                else{
+                    weights.push(weight);
+                    dates.push(todate);
+                }
+            }
+            else{
+                weights.push(weight);
+                dates.push(todate);
+            }
             collection.updateOne({userId: userId}
-                , {$set: {weights: weights}}, {upsert: true},
+                , {$set: {weights: weights, dates:dates}}, {upsert: true},
                 function (err, result) {
                     assert.equal(err, null);
                     assert.equal(1, result.result.n);
@@ -55,6 +74,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
                 newChallenge.protein = challenge.protein;
                 newChallenge.fat = challenge.fiber;
                 newChallenge.fiber = challenge.fiber;
+                newChallenge.date= new Date();
                 if (docs &&docs.length>0) {
                     challenges = docs[0].challenges;
                 }
@@ -84,6 +104,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             newChallenge.protein = challenge.protein;
             newChallenge.fat = challenge.fiber;
             newChallenge.fiber = challenge.fiber;
+            newChallenge.date= new Date();
             dbase.createCollection('challenges', {size: 2148});
             collection = dbase.collection('challenges');
             console.log(collection);
@@ -121,6 +142,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
                 newconsumption.protein = consumption.protein;
                 newconsumption.fat = consumption.fiber;
                 newconsumption.fiber = consumption.fiber;
+                newconsumption.date= new Date();
                 if (docs  &&docs.length>0) {
                     consumptions = docs[0].consumptions;
                 }
@@ -151,6 +173,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
             newconsumption.protein = consumption.protein;
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
+            newconsumption.date= new Date();
             dbase.createCollection('consumptions', {size: 2148});
             collection = dbase.collection('consumptions');
             console.log(collection);
@@ -170,6 +193,81 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
     }
 
 };
+exports.updateConsumption = function (db, callback, userId, consumption) {
+    const dbase = db.db("nutrition"); //here
+    // Get the documents collection
+    let collection = dbase.collection("consumptions");
+    try {
+        collection.find({'userId': userId}).toArray(function (err, docs) {
+            assert.equal(err, null);
+            console.log("Found the following records");
+            console.log(docs);
+            let consumptions = [];
+            try {
+                let newconsumption = {};
+                newconsumption.kcals = consumption.kcals;
+                newconsumption.carbohydrates = consumption.carbohydrates;
+                newconsumption.protein = consumption.protein;
+                newconsumption.fat = consumption.fiber;
+                newconsumption.fiber = consumption.fiber;
+                newconsumption.date= new Date();
+                if (docs  &&docs.length>0) {
+                    consumptions = docs[0].consumptions;
+                    newconsumption= consumptions.pop();
+                    newconsumption.kcals  += consumption.kcals;
+                    newconsumption.carbohydrates += consumption.carbohydrates;
+                    newconsumption.protein += consumption.protein;
+                    newconsumption.fat += consumption.fiber;
+                    newconsumption.fiber += consumption.fiber;
+                }
+
+                consumptions.push(newconsumption);
+                collection.updateOne({userId: userId}
+                    , {$set: {consumptions: consumptions}}, {upsert: true},
+                    function (err, result) {
+                        assert.equal(err, null);
+                        assert.equal(1, result.result.n);
+                        console.log("Added consumption");
+                        callback(result);
+                    });
+            }
+            catch (err) {
+                callback(err);
+                return;
+            }
+
+
+        });
+    }
+    catch (err) {
+        try {
+            let newconsumption = {};
+            newconsumption.kcals = consumption.kcals;
+            newconsumption.carbohydrates = consumption.carbohydrates;
+            newconsumption.protein = consumption.protein;
+            newconsumption.fat = consumption.fiber;
+            newconsumption.fiber = consumption.fiber;
+            newconsumption.date= new Date();
+            dbase.createCollection('consumptions', {size: 2148});
+            collection = dbase.collection('consumptions');
+            console.log(collection);
+            collection.updateOne({userId: userId}
+                , {$set: {consumptions: [consumption]}}, {upsert: true},
+                function (err, result) {
+                    assert.equal(err, null);
+                    assert.equal(1, result.result.n);
+                    console.log("Added consumption");
+                    callback(result);
+                });
+        }
+        catch (err) {
+            callback(err);
+        }
+
+    }
+
+};
+
 exports.indexCollections = function (db, callback) {
     const dbase = db.db("nutrition"); //here
 
@@ -253,7 +351,8 @@ exports.getLastWeight = function (db, callback, userId) {
             let weights = docs[0].weights;
             if (weights && weights.length > 0) {
                 let w = weights[weights.length - 1];
-                callback(w);
+                console.log(w);
+                callback(JSON.stringify(w));
             } else {
                 callback(null);
             }
@@ -302,6 +401,7 @@ exports.getLastConsumption = function (db, callback, userId) {
             let consumptions = docs[0].consumptions;
             if (consumptions && consumptions.length > 0) {
                 let w = consumptions[consumptions.length - 1];
+
                 callback(w);
             } else {
                 callback(null);
@@ -310,4 +410,17 @@ exports.getLastConsumption = function (db, callback, userId) {
             callback(null);
         }
     });
+};
+
+exports.dropCollections = function (db, callback, userId) {
+    const dbase = db.db("nutrition"); //here
+
+    // Get the documents collection
+    let collection = dbase.collection('consumptions');
+    collection.drop();
+    collection= dbase.collection('weights');
+    collection.drop();
+    collection= dbase.collection('chsllenges');
+    collection.drop();
+    callback();
 };

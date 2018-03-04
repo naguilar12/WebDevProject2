@@ -23,8 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -86,6 +87,7 @@ app.get("/API/food/:name", function (req, res) {
 app.get("/API/food/nutrition/:id", function (req, res) {
     // CALL API HERE
     let url = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=" + req.params.id + "&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3";
+    console.log(url);
     request(url,
         function (error, response, body) {
             if (error) {
@@ -93,16 +95,37 @@ app.get("/API/food/nutrition/:id", function (req, res) {
             }
             if (!error && response.statusCode == 200) {
                 let food = JSON.parse(body).foods[0].food;
-
-                item = {
-                    name: food.desc.name,
-                    kcals: food.nutrients[1].value,
-                    protein: food.nutrients[3].value,
-                    fat: food.nutrients[4].value,
-                    carbohydrates: food.nutrients[6].value,
-                    fiber: food.nutrients[7].value
-                };
+                item=null;
+                let kcals,protein,fat,carbohydrates,fiber;
+                if(food){
+                    food.nutrients.forEach((n)=>{
+                       if (n.name==="Energy") {
+                           kcals = n.value;
+                       }
+                       else if(n.name==="Protein"){
+                           protein = n.value;
+                       }
+                       else if(n.name === "Total lipid (fat)"){
+                           fat= n.value;
+                       }
+                       else if(n.name === "Carbohydrate, by difference"){
+                           carbohydrates = n.value;
+                       }
+                       else if ( n.name === "Fiber, total dietary"){
+                           fiber = n.value;
+                       }
+                    });
+                    item = {
+                        name: food.desc.name,
+                        kcals: kcals,
+                        protein: protein,
+                        fat: fat,
+                        carbohydrates: carbohydrates,
+                        fiber: fiber
+                    };
+                }
                 res.send(item);
+
             }
         })
 
@@ -133,8 +156,21 @@ app.get("/API/myWeight/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+app.get("/API/myWeight/last/:userId", function (req, res) {
+    // search db if user already has a document of weights add value
 
-app.get("/API/myChallenge/:userId", function (req, res) {
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        CRUD.getLastWeight(db, function (w) {
+            db.close();
+            res.send(w);
+        }, Number(req.params.userId));
+    });
+});
+
+app.get("/API/myChallenge/last/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -161,7 +197,7 @@ app.post("/API/myChallenge/:userId", function (req, res) {
     });
 });
 
-app.get("/API/myConsumption/:userId", function (req, res) {
+app.get("/API/myConsumption/last/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
 
     MongoClient.connect(DBurl, function (err, db) {
@@ -177,16 +213,24 @@ app.get("/API/myConsumption/:userId", function (req, res) {
 
 app.post("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption add value
-    if (Number(req.params.userId) !== req.params.userId) {
-        res.send(Response.error());
-        console.log("wrong formulated API petition");
-        return;
-    }
 
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
-        CRUD.insertChallenge(db, function (weights) {
+        CRUD.insertConsumption(db, function (weights) {
+            db.close();
+            res.send(weights);
+        }, Number(req.params.userId), req.body);
+    });
+});
+
+app.put("/API/myConsumption/:userId", function (req, res) {
+    // search db if user already has a document of consumption add value
+
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        CRUD.updateConsumption(db, function (weights) {
             db.close();
             res.send(weights);
         }, Number(req.params.userId), req.body);
@@ -200,4 +244,11 @@ app.listen(process.env.PORT || 80, () => {
 });
 
 
-
+/*
+MongoClient.connect(DBurl, function (err, db) {
+    assert.equal(null, err);
+    CRUD.dropCollections(db, function(){
+        console.log("All collections droped");
+    })
+});
+*/

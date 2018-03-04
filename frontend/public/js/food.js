@@ -1,4 +1,5 @@
 /*global $*/
+/*
 "use strict";
 let root = "http://localhost";
 
@@ -76,3 +77,4 @@ function main() {
 }
 
 $(document).ready(main);
+*/

@@ -34,3 +34,13 @@ card{
 .buttonsDiv{
     margin:2%;
 }
+
+#newDayModal > div:nth-child(1) > div:nth-child(1){
+  width:150%;
+}
+#newDayModal > div:nth-child(1) > div:nth-child(1) > div:nth-child(2){
+   margin: 2%;
+}
+.row{
+    width:100%;
+}

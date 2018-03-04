@@ -9,6 +9,10 @@ import Signin from "./Signin";
 import Stats from "./Stats";
 import { CookiesProvider } from 'react-cookie';
 
+/**
+ * This class contains all the components needed to display the whole application.
+ */
+
 class App extends Component {
 
     constructor(props) {
@@ -17,7 +21,8 @@ class App extends Component {
         this.state = {
             navbar: 'index',
             locationUser: 'index',
-            location: 'about'
+            location: 'about',
+            idUser: 1,
         };
         this.callbackNavbar = this.callbackNavbar.bind(this);
     }
@@ -54,7 +59,7 @@ class App extends Component {
                 main = <Stats/>;
             }
             else if (this.state.locationUser === 'challenge') {
-                main = <MainChallenge/>;
+                main = <MainChallenge idUser={this.state.idUser}/>;
             }
         }
 
@@ -62,8 +67,12 @@ class App extends Component {
         return (
 
             <div className="App">
-                {navbar}
-                {main}
+    <div>
+    {navbar}
+    </div>
+    <div className="container-fluid scroll">
+    {main}
+    </div>
             </div>
         );
     }
