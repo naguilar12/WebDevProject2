@@ -15,7 +15,7 @@ export default class WeightModal extends Component{
     }
 
     handleChange(e) {
-        if(Number(e.target.value)) {
+        if(Number(e.target.value) || e.target.val.charAt(-1)===".") {
             this.setState({weight: Number(e.target.value)});
         }
         else{

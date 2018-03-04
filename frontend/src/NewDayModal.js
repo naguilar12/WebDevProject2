@@ -120,6 +120,14 @@ export default class NewDayModal extends Component {
              carbohydrates = this.props.carbohydrates;
              fiber = this.props.fiber;
              fat = this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9;
+             this.setState({
+                 protein : this.props.weight * 2,
+                 kcals : this.props.kcals,
+                 carbohydrates : this.props.carbohydrates,
+                 fiber : this.props.fiber,
+                 fat : this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9,
+                 first: false
+             })
         }
         else{
             protein = this.state.protein;
