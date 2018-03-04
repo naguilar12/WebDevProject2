@@ -6,6 +6,9 @@ General styles
     text-align: center;
     margin: auto;
     position: center;
+    flex: 1;
+    justifyContent: 'center';
+    alignItems: 'center';
 
 }
 
@@ -14,7 +17,7 @@ Banner styles
  -------------*/
 
 .banner{
-    background-image: url("../resources/diet-banner.jpg");
+    background-image: url("./../resources/diet-banner.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;

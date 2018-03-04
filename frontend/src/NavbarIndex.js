@@ -20,40 +20,29 @@ export default class NavbarIndex extends Component{
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <a className="navbar-brand" onClick={this.state.onChange.bind(this,"index")}><img className="img-responsive" id="navbar_logo"
+                <a className="navbar-brand" onClick={this.state.onChange.bind(this,"about")}><img className="img-responsive" id="navbar_logo"
                                                                src={"/resources/diet_advisor_logo.png"}
                                                                alt="diet_advisor_logo" /></a>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li id="home-option" className="nav-item center-items">
-                            <a id="home-link" className="nav-link" onClick={this.state.onChange.bind(this,"index")}>
+                            <a id="home-link" className="nav-link" onClick={this.state.onChange.bind(this,"about")}>
                                 <i className="fa fa-home"></i><br/>
                                 Home
                             </a>
                         </li>
-                        <li id="my-stats-option" className="nav-item center-items">
-                            <a id="my-stats-link" className="nav-link" onClick={this.state.onChange.bind(this,"stats")}>
-                                <i className="fa fa-line-chart"></i><br/>
-                                My Stats
+                        <li id="signin-option" className="nav-item center-items">
+                            <a id="signin-link" className="nav-link" onClick={this.state.onChange.bind(this,"signin")}>
+                                <i className="fa fa-sign-in"></i><br/>
+                                Sign In
                             </a>
                         </li>
-                        <li id="challenge-option" className="nav-item center-items">
-                            <a id="challenge-link" className="nav-link" onClick={this.state.onChange.bind(this,"challenge")}>
-                                <i className="fa fa-cutlery"></i><br/>
-                                Challenge
-                            </a>
-                        </li>
-                        <li id="user-option" className="nav-item  center-items">
-                            <a className="nav-link dropdown-toggle user-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li id="login-option" className="nav-item  center-items">
+                            <a id="login-link" className="nav-link" onClick={this.state.onChange.bind(this,"login")}>
                                 <i className="fa fa-user-circle"></i><br/>
-                                Name
+                                Login
                             </a>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" >
-                                    <i className="fa fa-power-off"></i>  Logout
-                                </a>
-                            </div>
                         </li>
                     </ul>
                 </div>
