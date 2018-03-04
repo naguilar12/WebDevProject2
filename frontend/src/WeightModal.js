@@ -15,7 +15,7 @@ export default class WeightModal extends Component{
     }
 
     handleChange(e) {
-        if(Number(e.target.value) || e.target.value.charAt(-1)===".") {
+        if(Number(e.target.value) ) {
             this.setState({weight: Number(e.target.value)});
         }
         else{
@@ -44,7 +44,7 @@ export default class WeightModal extends Component{
 
                         
                         <div className="modal-body row">
-                            <input id="weight" type="text" className="col-9" onChange={this.handleChange}/>
+                            <input id="weight" type="text" className="col-9" onChange={this.handleChange} value={this.state.weight}/>
                             <button type="button" className="submitWeight col-3 btn btn-primary" onClick={this.onClick}>Submit</button>
                             {actual}
                         </div>

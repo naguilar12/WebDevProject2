@@ -18,7 +18,7 @@ export default class Stats extends Component{
                 {name: 'Page F', isa: 1000, pv: 3800, amt: 2500},
                 {name: 'Page G', isa: 500, pv: 4300, amt: 2100},*/
                 ]
-        }
+        };
         this.dataCallback = this.dataCallback.bind(this);
         this.dataCallback(this.state.userId);
     }
@@ -27,19 +27,21 @@ export default class Stats extends Component{
     dataCallback(userid){
         fetch("/API/myWeight/"+userid)
             .then((res)=>{
-                return res.json();
+                return (res.json());
             })
             .then((user)=>{
+                let weights= user[0].weights;
                 let i = 0;
-                user.forEach((w) => {
-                    let date = new Date(w.dates[i]*1000*60*60);
+                console.log(weights);
+                weights.forEach((w) => {
+                    let date = new Date(user[0].dates[i]*1000*60*60);
                     let format = ""+date.getDate().toString()+"/"+(date.getMonth()+1).toString()+"/"
-                        +date.getFullYear().toString().replace("20","")
-                    let wei = { name: format, weight: w.weights[i]};
+                        +date.getFullYear().toString().replace("20","");
+                    let wei = { name: format, weight: w};
                     let currState = this.state.data.slice();
                     this.setState({
                         data: currState.concat(wei)
-                    })
+                    });
                     i++;
                 });
             })
