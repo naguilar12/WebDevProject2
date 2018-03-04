@@ -10,6 +10,7 @@ import Stats from "./Stats";
 import Base64 from "base-64";
 import Utf8 from "utf8";
 
+
 /**
  * This class contains all the components needed to display the whole application.
  */
