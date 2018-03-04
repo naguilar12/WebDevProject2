@@ -20,6 +20,9 @@
     "macronutrientes",
     "calorias"
   ],
+  "engines": {
+    "node": "8.9.4"
+  },
   "author": "Tomas Venegas and Juan Lovera",
   "license": "MIT",
   "bugs": {
