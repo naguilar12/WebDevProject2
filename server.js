@@ -31,44 +31,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-/*
-app.get("/", (req, res) =>{
-    console.log("hola");
-    console.log("Cookies :  ", req.cookies);
-    if(req.cookies){
-        res.cookie(cookie_name , 'cookie_value').send('Cookie is set');
-    }else{
-        res.sendfile("public", "index.html")
-    }
-});
-*/
-app.get("/index.html", (req, res) =>{
-    console.log("Cookies :  ", req.cookies);
-    if(req.cookies){
 
-    }else{
-        res.sendfile("public", "index.html");
-    }
-});
-
-app.get("/challenge.html", (req, res) =>{
-    console.log("Cookies :  ", req.cookies);
-    if(req.cookies){
-        res.sendfile("public", "challenge.html");
-    }else{
-        res.sendfile("public", "index.html");
-    }
-});
-
-app.get("/stats.html", (req, res) => {
-    console.log("Cookies :  ", req.cookies);
-    if(req.cookies){
-        res.sendfile("public", "stats.html");
-    }else{
-        res.sendfile("public", "index.html");
-    }
-});
-
+//search for a food obj
 app.get("/API/food/:name", function (req, res) {
     // CALL API HERE
     request("https://api.nal.usda.gov/ndb/search/?format=json&q=" + req.params.name + "&max=25&offset=0&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3",
@@ -86,6 +50,8 @@ app.get("/API/food/:name", function (req, res) {
             }
         })
 });
+
+//get detail of a food obj
 app.get("/API/food/nutrition/:id", function (req, res) {
     // CALL API HERE
     let url = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=" + req.params.id + "&type=f&format=json&api_key=hLowbDVqOU42auJEBrZPL8tGUSbGd5ok91ficFr3";
@@ -133,6 +99,7 @@ app.get("/API/food/nutrition/:id", function (req, res) {
 
 });
 
+//post a new weight  for a user
 app.post("/API/myWeight/:userId/:value", function (req, res) {
     //TODO: search db if user already has a document of weights add value, else create document
     MongoClient.connect(DBurl, function (err, db) {
@@ -145,6 +112,7 @@ app.post("/API/myWeight/:userId/:value", function (req, res) {
     });
 });
 
+//get all weights for a user
 app.get("/API/myWeight/:userId", function (req, res) {
     // search db if user already has a document of weights add value
 
@@ -158,6 +126,8 @@ app.get("/API/myWeight/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+
+//get last weight for a user
 app.get("/API/myWeight/last/:userId", function (req, res) {
     // search db if user already has a document of weights add value
 
@@ -172,6 +142,22 @@ app.get("/API/myWeight/last/:userId", function (req, res) {
     });
 });
 
+//get weight variation in last 2 weeks
+app.get("/API/myWeight/difference/:userId", function (req, res) {
+    // search db if user already has a document of weights add value
+
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        CRUD.weightDifference(db, function (w) {
+            db.close();
+            res.send(w);
+        }, Number(req.params.userId));
+    });
+});
+
+//get last challenge for a user
 app.get("/API/myChallenge/last/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value
 
@@ -185,6 +171,8 @@ app.get("/API/myChallenge/last/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+
+//set a new challenge for a user
 app.post("/API/myChallenge/:userId", function (req, res) {
     // search db if user already has a document of challenge add value
 
@@ -199,6 +187,7 @@ app.post("/API/myChallenge/:userId", function (req, res) {
     });
 });
 
+//get last consumption for a user
 app.get("/API/myConsumption/last/:userId", function (req, res) {
     // search db if user already has a document of consumption returns last value
 
@@ -213,6 +202,7 @@ app.get("/API/myConsumption/last/:userId", function (req, res) {
     });
 });
 
+//get all consumptions for a user
 app.post("/API/myConsumption/:userId", function (req, res) {
     // search db if user already has a document of consumption add value
 
@@ -226,9 +216,9 @@ app.post("/API/myConsumption/:userId", function (req, res) {
     });
 });
 
+//update last value of consumption
 app.put("/API/myConsumption/:userId", function (req, res) {
-    // search db if user already has a document of consumption add value
-
+    // search db if user already has a document of consumption update last value
     MongoClient.connect(DBurl, function (err, db) {
         assert.equal(null, err);
         console.log("Connected successfully to server");
@@ -301,6 +291,7 @@ app.listen(process.env.PORT || 80, () => {
 });
 
 
+//only activate this to drop all tables.
 /*
 MongoClient.connect(DBurl, function (err, db) {
     assert.equal(null, err);

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "./styles/NavbarUser.css"
 import registerServiceWorker from "./registerServiceWorker";
 
-export default class NavbarIndex extends Component{
+export default class NavbarUser extends Component{
     constructor(props) {
         super(props);
 

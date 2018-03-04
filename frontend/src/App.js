@@ -20,9 +20,9 @@ class App extends Component {
         super(props);
 
         this.state = {
-            navbar: 'index',
-            locationUser: 'index',
-            location: 'about',
+            navbar: 'user',
+            locationUser: 'challenge',
+            location: 'challenge',
             idUser: 1,
             userName: null,
             userMail: null,
