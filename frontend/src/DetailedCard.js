@@ -9,7 +9,7 @@ export default class DetailedCard extends Component {
         this.handleTextChange= this.handleTextChange.bind(this);
     }
     handleTextChange(e) {
-        if(Number(e.target.value) || e.target.val.charAt(-1)===".") {
+        if(Number(e.target.value) || e.target.value.charAt(-1)===".") {
             this.props.onPortionChange(Number(e.target.value));
         }
         else{
