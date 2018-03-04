@@ -1,4 +1,4 @@
- const assert = require('assert');
+const assert = require('assert');
 exports.insertWeight = function (db, callback, userId, weight) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -10,31 +10,31 @@ exports.insertWeight = function (db, callback, userId, weight) {
             console.log(docs);
             let weights = [];
             let dates = [];
-            if (docs && docs.length>0) {
+            if (docs && docs.length > 0) {
                 weights = docs[0].weights;
                 dates = docs[0].dates;
             }
-            let todate= new Date();
-            todate= todate/3600000
-            if (dates && dates.length>0){
-                let date= dates[dates.length-1];
-                if (todate-date<20){
+            let todate = new Date();
+            todate = todate / 3600000
+            if (dates && dates.length > 0) {
+                let date = dates[dates.length - 1];
+                if (todate - date < 20) {
                     weights.pop();
                     weights.push(weight);
                     dates.pop();
                     dates.push(todate);
                 }
-                else{
+                else {
                     weights.push(weight);
                     dates.push(todate);
                 }
             }
-            else{
+            else {
                 weights.push(weight);
                 dates.push(todate);
             }
             collection.updateOne({userId: userId}
-                , {$set: {weights: weights, dates:dates}}, {upsert: true},
+                , {$set: {weights: weights, dates: dates}}, {upsert: true},
                 function (err, result) {
                     assert.equal(err, null);
                     assert.equal(1, result.result.n);
@@ -74,8 +74,8 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
                 newChallenge.protein = challenge.protein;
                 newChallenge.fat = challenge.fiber;
                 newChallenge.fiber = challenge.fiber;
-                newChallenge.date= new Date();
-                if (docs &&docs.length>0) {
+                newChallenge.date = new Date();
+                if (docs && docs.length > 0) {
                     challenges = docs[0].challenges;
                 }
 
@@ -104,7 +104,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             newChallenge.protein = challenge.protein;
             newChallenge.fat = challenge.fiber;
             newChallenge.fiber = challenge.fiber;
-            newChallenge.date= new Date();
+            newChallenge.date = new Date();
             dbase.createCollection('challenges', {size: 2148});
             collection = dbase.collection('challenges');
             console.log(collection);
@@ -142,8 +142,8 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
                 newconsumption.protein = consumption.protein;
                 newconsumption.fat = consumption.fiber;
                 newconsumption.fiber = consumption.fiber;
-                newconsumption.date= new Date();
-                if (docs  &&docs.length>0) {
+                newconsumption.date = new Date();
+                if (docs && docs.length > 0) {
                     consumptions = docs[0].consumptions;
                 }
 
@@ -173,7 +173,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
             newconsumption.protein = consumption.protein;
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
-            newconsumption.date= new Date();
+            newconsumption.date = new Date();
             dbase.createCollection('consumptions', {size: 2148});
             collection = dbase.collection('consumptions');
             console.log(collection);
@@ -210,11 +210,11 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
                 newconsumption.protein = consumption.protein;
                 newconsumption.fat = consumption.fiber;
                 newconsumption.fiber = consumption.fiber;
-                newconsumption.date= new Date();
-                if (docs  &&docs.length>0) {
+                newconsumption.date = new Date();
+                if (docs && docs.length > 0) {
                     consumptions = docs[0].consumptions;
-                    newconsumption= consumptions.pop();
-                    newconsumption.kcals  += consumption.kcals;
+                    newconsumption = consumptions.pop();
+                    newconsumption.kcals += consumption.kcals;
                     newconsumption.carbohydrates += consumption.carbohydrates;
                     newconsumption.protein += consumption.protein;
                     newconsumption.fat += consumption.fiber;
@@ -247,7 +247,7 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
             newconsumption.protein = consumption.protein;
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
-            newconsumption.date= new Date();
+            newconsumption.date = new Date();
             dbase.createCollection('consumptions', {size: 2148});
             collection = dbase.collection('consumptions');
             console.log(collection);
@@ -347,7 +347,7 @@ exports.getLastWeight = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        if (docs && docs.length>0) {
+        if (docs && docs.length > 0) {
             let weights = docs[0].weights;
             if (weights && weights.length > 0) {
                 let w = weights[weights.length - 1];
@@ -356,7 +356,7 @@ exports.getLastWeight = function (db, callback, userId) {
             } else {
                 callback(null);
             }
-        }else{
+        } else {
             callback(null);
         }
     });
@@ -371,7 +371,7 @@ exports.getLastChallenge = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        if (docs && docs.length>0) {
+        if (docs && docs.length > 0) {
             let challenges = docs[0].challenges;
             console.log(challenges);
             if (challenges && challenges.length > 0) {
@@ -381,7 +381,7 @@ exports.getLastChallenge = function (db, callback, userId) {
             } else {
                 callback(null);
             }
-        }else{
+        } else {
             callback(null);
         }
 
@@ -397,7 +397,7 @@ exports.getLastConsumption = function (db, callback, userId) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
-        if (docs && docs.length>0) {
+        if (docs && docs.length > 0) {
             let consumptions = docs[0].consumptions;
             if (consumptions && consumptions.length > 0) {
                 let w = consumptions[consumptions.length - 1];
@@ -406,11 +406,12 @@ exports.getLastConsumption = function (db, callback, userId) {
             } else {
                 callback(null);
             }
-        }else{
+        } else {
             callback(null);
         }
     });
 };
+
 
 exports.dropCollections = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
@@ -418,9 +419,51 @@ exports.dropCollections = function (db, callback, userId) {
     // Get the documents collection
     let collection = dbase.collection('consumptions');
     collection.drop();
-    collection= dbase.collection('weights');
+    collection = dbase.collection('weights');
     collection.drop();
-    collection= dbase.collection('chsllenges');
+    collection = dbase.collection('chsllenges');
     collection.drop();
     callback();
+};
+
+exports.weightDifference = function (db, callback, userId) {
+    const dbase = db.db("nutrition"); //here
+
+    // Get the documents collection
+    let collection = dbase.collection('weights');
+
+    collection.find({'userId': userId}).toArray(function (err, docs) {
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs);
+        if (docs && docs.length > 0) {
+            let weights = docs[0].weights;
+            if (weights && weights.length > 10) {
+                let firstLandmark = weights.length - 10;
+                let secondLandmark = weights.length - 5;
+                let previous = 0;
+                let last = 0;
+                let counter = 0;
+                weights.forEach((w) => {
+                    if (counter >= firstLandmark && counter < secondLandmark) {
+                        previous += w;
+                    }
+                    else if (counter >= secondLandmark) {
+                        last += w;
+                    }
+                    counter += 1;
+                });
+                previous = previous/5;
+                last= last/5;
+                let result = last-previous;
+                let w = weights[weights.length - 1];
+                console.log(result);
+                callback(JSON.stringify(result));
+            } else {
+                callback(null);
+            }
+        } else {
+            callback(null);
+        }
+    });
 };

@@ -169,6 +169,19 @@ app.get("/API/myWeight/last/:userId", function (req, res) {
         }, Number(req.params.userId));
     });
 });
+app.get("/API/myWeight/difference/:userId", function (req, res) {
+    // search db if user already has a document of weights add value
+
+    MongoClient.connect(DBurl, function (err, db) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        CRUD.weightDifference(db, function (w) {
+            db.close();
+            res.send(w);
+        }, Number(req.params.userId));
+    });
+});
 
 app.get("/API/myChallenge/last/:userId", function (req, res) {
     // search db if user already has a document of challenge returns last value

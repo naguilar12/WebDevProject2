@@ -38,7 +38,8 @@ export default class mainChallenge extends Component {
             },
             weight: 0,
             searchValue: "",
-            portions: 1
+            portions: 1,
+            weightDifference: null
         };
         //bind all functions
         this.searchCallback = this.searchCallback.bind(this);
@@ -61,14 +62,26 @@ export default class mainChallenge extends Component {
 
     }
 
+    //get weight difference to make recomendations
+    getWeightDifference(){
+        fetch("http://localhost/API/myWeight/difference" + this.props.idUser)
+            .then((res) => {
+                return (res.json());
+            })
+            .then((food) => {
+                this.setState({foods: food});
+            })
+            .catch((err) => console.log(err));
+    }
+
     //when a search is launch call the api to get resulting food
     searchCallback() {
         fetch("http://localhost/API/food/" + this.state.searchValue)
             .then((res) => {
                 return (res.json());
             })
-            .then((food) => {
-                this.setState({foods: food});
+            .then((diff) => {
+                this.setState({weightDifference: diff});
             })
             .catch((err) => console.log(err));
     }
@@ -271,7 +284,7 @@ export default class mainChallenge extends Component {
                 <NewDayModal kcals={this.state.kcals.total} protein={this.state.protein.total}
                              carbohydrates={this.state.carbohydrates.total}
                              fat={this.state.fat.total} fiber={this.state.fiber.total}
-                             onSubmit={this.onSubmitNewDay}/>
+                             onSubmit={this.onSubmitNewDay} weight={this.state.weight} weightDifference={this.state.weightDifference}/>
             </div>
         );
     }

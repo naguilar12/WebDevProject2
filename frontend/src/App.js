@@ -21,7 +21,7 @@ class App extends Component {
         this.state = {
             navbar: 'index',
             locationUser: 'index',
-            location: 'about',
+            location: 'challenge',
             idUser: 1,
         };
         this.callbackNavbar = this.callbackNavbar.bind(this);
