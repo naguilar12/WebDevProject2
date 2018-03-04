@@ -1,4 +1,5 @@
 const assert = require('assert');
+//insert a new weight (or update if in the same day)
 exports.insertWeight = function (db, callback, userId, weight) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -57,6 +58,7 @@ exports.insertWeight = function (db, callback, userId, weight) {
             });
     }
 };
+//insert a challenge
 exports.insertChallenge = function (db, callback, userId, challenge) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -125,6 +127,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
     }
 
 };
+//insert a new value in consumption
 exports.insertConsumption = function (db, callback, userId, consumption) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -193,6 +196,8 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
     }
 
 };
+
+//update last value of consumption
 exports.updateConsumption = function (db, callback, userId, consumption) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
@@ -268,6 +273,7 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
 
 };
 
+//to index all collections using userId
 exports.indexCollections = function (db, callback) {
     const dbase = db.db("nutrition"); //here
 
@@ -297,6 +303,7 @@ exports.indexCollections = function (db, callback) {
     );
 };
 
+//get all weights history for a user
 exports.getWeights = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -310,7 +317,7 @@ exports.getWeights = function (db, callback, userId) {
         callback(docs);
     });
 };
-
+//get all challenges for a user
 exports.getChallenges = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -324,6 +331,7 @@ exports.getChallenges = function (db, callback, userId) {
         callback(docs);
     });
 };
+//get all consumptions for a user
 exports.getConsumptions = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -337,6 +345,7 @@ exports.getConsumptions = function (db, callback, userId) {
         callback(docs);
     });
 };
+//get last item in weights
 exports.getLastWeight = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -361,6 +370,7 @@ exports.getLastWeight = function (db, callback, userId) {
         }
     });
 };
+//get last item in challenge
 exports.getLastChallenge = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -387,6 +397,7 @@ exports.getLastChallenge = function (db, callback, userId) {
 
     });
 };
+//get last item in consumption
 exports.getLastConsumption = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -412,7 +423,7 @@ exports.getLastConsumption = function (db, callback, userId) {
     });
 };
 
-
+//to drop all collections
 exports.dropCollections = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
@@ -425,7 +436,7 @@ exports.dropCollections = function (db, callback, userId) {
     collection.drop();
     callback();
 };
-
+//calculate weight differnce over last two weeks (10 days)
 exports.weightDifference = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
