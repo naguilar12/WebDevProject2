@@ -146,6 +146,11 @@ Content Adjustment Styles
 .label-progress{
     width:20%
 }
+
+.chart-content{
+    height: 100%;
+}
+
 h1{
     text-align: center;
 }
