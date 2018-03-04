@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StatsChart from "./StatsChart";
 
+/** This class contains the user stats component**/
 export default class Stats extends Component{
     constructor(props) {
         super(props);
@@ -22,6 +23,7 @@ export default class Stats extends Component{
         this.dataCallback(this.state.userId);
     }
 
+    /**Get weights from db*/
     dataCallback(userid){
         fetch("/API/myWeight/"+userid)
             .then((res)=>{
