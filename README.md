@@ -17,6 +17,7 @@ How to run it:
   * npm install
   * yarn build
   * cd /
+  * set an env variable 'url' to the access url of your mongoDB (with credentials)
   * npm start
   * Enjoy it.
   
