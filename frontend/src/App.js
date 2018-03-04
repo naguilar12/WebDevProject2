@@ -121,7 +121,7 @@ class App extends Component {
                 main = <About/>;
             }
             else if (this.state.locationUser === 'stats') {
-                main = <Stats/>;
+                main = <Stats userId={this.state.idUser}/>;
             }
             else if (this.state.locationUser === 'challenge') {
                 main = <MainChallenge idUser={this.state.idUser}/>;

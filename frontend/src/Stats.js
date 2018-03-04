@@ -6,6 +6,7 @@ export default class Stats extends Component{
         super(props);
 
         this.state = {
+            userId: props.userId,
             data:[
                 /*
                 {name: 'Page A', isa: 4000, pv: 2400, amt: 2400},
@@ -17,8 +18,8 @@ export default class Stats extends Component{
                 {name: 'Page G', isa: 500, pv: 4300, amt: 2100},*/
                 ]
         }
-
-        this.dataCallback(1);
+        this.dataCallback = this.dataCallback.bind(this);
+        this.dataCallback(this.state.userId);
     }
 
     dataCallback(userid){
@@ -27,18 +28,17 @@ export default class Stats extends Component{
                 return res.json();
             })
             .then((user)=>{
-                this.setUserWeights(user);
+                let i = 0;
+                user.forEach((w) => {
+                    let wei = { name: w.dates[i]*, weight: w.weights[i]};
+                    let currState = this.state.data.slice();
+                    this.setState({
+                        data: currState.concat(wei)
+                    })
+                    i++;
+                });
             })
             .catch((err) => console.log(err) );
-    }
-
-    setUserWeights(user){
-        let i = 0;
-        user.weights.forEach((w) => {
-            let wei = { name: user.dates.get(i), weight: w};
-            this.state.data.concat(wei);
-            i++;
-        });
     }
 
     render() {
