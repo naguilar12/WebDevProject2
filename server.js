@@ -20,6 +20,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
+//Es recomendable que separen las peticiones que satisface su API del archivo server.js
+//Pueden hacer uso del Router de express y separar por carpetas dependiendo de las funcionalidades
+
+//En cuanto a las peticiones que acceden al req.body.params, seria bueno indicar que propiedades se solicitan
+//para cada petición en específico. De resto, el proyecto esta muy bien documentado
 
 //search for a food obj
 app.get("/API/food/:name", function (req, res) {
