@@ -29,7 +29,7 @@ export default class ChallengeStats extends Component {
 
         return (
             <div className="row">
-                <div className="container-fluid remainingVals col-9">
+                <div className="container-fluid remainingVals col-sm-9 col-12">
 
                     <ProgressBar unit={kunit} pVal={pkcals} total={this.props.kcals.total}
                                  actual={this.props.kcals.actual} name={kname}/>
@@ -44,7 +44,7 @@ export default class ChallengeStats extends Component {
 
 
                 </div>
-                <div className="center-items col-3">
+                <div className="center-items col-sm-3 ">
                     <div className="buttonsDiv">
                         <button type="button" className="btn btn-primary" data-toggle="modal"
                                 data-target="#weightModal">

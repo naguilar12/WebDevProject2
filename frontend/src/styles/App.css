@@ -11,15 +11,17 @@ General styles
 html, body {
     height: 100%; /*Fixes the height to 100% of the viewport*/
 }
+@media (min-width: 568px) {
 body {
     padding-top: 87px; /*50px for the height of the navbar + 37px for the offset*/
     padding-bottom: 50px; /*50px for the height of the bottom navbar*/
 }
-nav  {
-    top: 37px; /*Offsets the top navbar 37px from the top of the viewport*/
 
+    nav {
+        top: 37px; /*Offsets the top navbar 37px from the top of the viewport*/
+
+    }
 }
-
 /*-------------
 Banner styles
  -------------*/
