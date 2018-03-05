@@ -1,11 +1,11 @@
-const assert = require('assert');
+const assert = require("assert");
 //insert a new weight (or update if in the same day)
 exports.insertWeight = function (db, callback, userId, weight) {
     const dbase = db.db("nutrition"); //here
     // Get the documents collection
     let collection = dbase.collection("weights");
     try {
-        collection.find({'userId': userId}).toArray(function (err, docs) {
+        collection.find({"userId": userId}).toArray(function (err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
@@ -45,8 +45,8 @@ exports.insertWeight = function (db, callback, userId, weight) {
         });
     }
     catch (err) {
-        dbase.createCollection('weights', {size: 2148});
-        collection = dbase.collection('weights');
+        dbase.createCollection("weights", {size: 2148});
+        collection = dbase.collection("weights");
         console.log(collection);
         collection.updateOne({userId: userId}
             , {$set: {weights: [weight]}}, {upsert: true},
@@ -64,7 +64,7 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
     // Get the documents collection
     let collection = dbase.collection("challenges");
     try {
-        collection.find({'userId': userId}).toArray(function (err, docs) {
+        collection.find({"userId": userId}).toArray(function (err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
@@ -107,8 +107,8 @@ exports.insertChallenge = function (db, callback, userId, challenge) {
             newChallenge.fat = challenge.fiber;
             newChallenge.fiber = challenge.fiber;
             newChallenge.date = new Date();
-            dbase.createCollection('challenges', {size: 2148});
-            collection = dbase.collection('challenges');
+            dbase.createCollection("challenges", {size: 2148});
+            collection = dbase.collection("challenges");
             console.log(collection);
             collection.updateOne({userId: userId}
                 , {$set: {challenges: [challenge]}}, {upsert: true},
@@ -133,7 +133,7 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
     // Get the documents collection
     let collection = dbase.collection("consumptions");
     try {
-        collection.find({'userId': userId}).toArray(function (err, docs) {
+        collection.find({"userId": userId}).toArray(function (err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
@@ -177,8 +177,8 @@ exports.insertConsumption = function (db, callback, userId, consumption) {
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
             newconsumption.date = new Date();
-            dbase.createCollection('consumptions', {size: 2148});
-            collection = dbase.collection('consumptions');
+            dbase.createCollection("consumptions", {size: 2148});
+            collection = dbase.collection("consumptions");
             console.log(collection);
             collection.updateOne({userId: userId}
                 , {$set: {consumptions: [consumption]}}, {upsert: true},
@@ -203,7 +203,7 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
     // Get the documents collection
     let collection = dbase.collection("consumptions");
     try {
-        collection.find({'userId': userId}).toArray(function (err, docs) {
+        collection.find({"userId": userId}).toArray(function (err, docs) {
             assert.equal(err, null);
             console.log("Found the following records");
             console.log(docs);
@@ -253,8 +253,8 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
             newconsumption.fat = consumption.fiber;
             newconsumption.fiber = consumption.fiber;
             newconsumption.date = new Date();
-            dbase.createCollection('consumptions', {size: 2148});
-            collection = dbase.collection('consumptions');
+            dbase.createCollection("consumptions", {size: 2148});
+            collection = dbase.collection("consumptions");
             console.log(collection);
             collection.updateOne({userId: userId}
                 , {$set: {consumptions: [consumption]}}, {upsert: true},
@@ -277,7 +277,7 @@ exports.updateConsumption = function (db, callback, userId, consumption) {
 exports.indexCollections = function (db, callback) {
     const dbase = db.db("nutrition"); //here
 
-    dbase.collection('weights').createIndex(
+    dbase.collection("weights").createIndex(
         {"userId": 1},
         null,
         function (err, results) {
@@ -285,7 +285,7 @@ exports.indexCollections = function (db, callback) {
             callback();
         }
     );
-    dbase.collection('challenges').createIndex(
+    dbase.collection("challenges").createIndex(
         {"userId": 1},
         null,
         function (err, results) {
@@ -293,7 +293,7 @@ exports.indexCollections = function (db, callback) {
             callback();
         }
     );
-    dbase.collection('consumptions').createIndex(
+    dbase.collection("consumptions").createIndex(
         {"userId": 1},
         null,
         function (err, results) {
@@ -308,9 +308,9 @@ exports.getWeights = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('weights');
+    let collection = dbase.collection("weights");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -322,9 +322,9 @@ exports.getChallenges = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('challenges');
+    let collection = dbase.collection("challenges");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -336,9 +336,9 @@ exports.getConsumptions = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('consumptions');
+    let collection = dbase.collection("consumptions");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -350,9 +350,9 @@ exports.getLastWeight = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('weights');
+    let collection = dbase.collection("weights");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -375,9 +375,9 @@ exports.getLastChallenge = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('challenges');
+    let collection = dbase.collection("challenges");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -402,9 +402,9 @@ exports.getLastConsumption = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('consumptions');
+    let collection = dbase.collection("consumptions");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);
@@ -428,11 +428,11 @@ exports.dropCollections = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('consumptions');
+    let collection = dbase.collection("consumptions");
     collection.drop();
-    collection = dbase.collection('weights');
+    collection = dbase.collection("weights");
     collection.drop();
-    collection = dbase.collection('chsllenges');
+    collection = dbase.collection("chsllenges");
     collection.drop();
     callback();
 };
@@ -441,9 +441,9 @@ exports.weightDifference = function (db, callback, userId) {
     const dbase = db.db("nutrition"); //here
 
     // Get the documents collection
-    let collection = dbase.collection('weights');
+    let collection = dbase.collection("weights");
 
-    collection.find({'userId': userId}).toArray(function (err, docs) {
+    collection.find({"userId": userId}).toArray(function (err, docs) {
         assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs);

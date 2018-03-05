@@ -1,19 +1,19 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const mysql = require('mysql');
-const assert = require('assert');
-const request = require('request');
+const mysql = require("mysql");
+const assert = require("assert");
+const request = require("request");
 const CRUD = require("./CRUD");
 const path = require("path");
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const utf8 = require("utf8");
 const base64 = require("base-64");
 
 process.env.JAWSDB_URL = "mysql://vp7576quty8bgs0a:k9w4gtwjo0sh4jsn@cig4l2op6r0fxymw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/unhl405k407wjdze";
 
 // Connection URL
-const DBurl = 'mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
+const DBurl = "mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 
 //Uses static directory "public"
@@ -54,7 +54,7 @@ app.get("/API/food/nutrition/:id", function (req, res) {
             }
             if (!error && response.statusCode == 200) {
                 let food = JSON.parse(body).foods[0].food;
-                item = null;
+                let item = null;
                 let kcals, protein, fat, carbohydrates, fiber;
                 if (food) {
                     food.nutrients.forEach((n) => {
@@ -227,7 +227,7 @@ app.get("/API/login/:userData", (req, res) => {
 
     let connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
-    connection.query('SELECT * FROM USERS WHERE EMAIL=\'' + params[0] + '\';', (err, rows, fields) => {
+    connection.query("SELECT * FROM USERS WHERE EMAIL=\"" + params[0] + "\";", (err, rows, fields) => {
         if (err) {
             console.log(err);
             return;
@@ -254,14 +254,14 @@ app.get("/API/signin/:userData", (req, res) => {
     let connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     try {
-        connection.query('INSERT INTO USERS (NAME, EMAIL, PASSWORD) ' +
-            'VALUES (\'' + params[0] + '\',\'' + params[1] + '\',\'' + params[2] + '\');', (err, rows, fields) => {
+        connection.query("INSERT INTO USERS (NAME, EMAIL, PASSWORD) " +
+            "VALUES (\"" + params[0] + "\",\"" + params[1] + "\",\"" + params[2] + "\");", (err, rows, fields) => {
             if (err) {
                 console.log(err);
                 throw err;
             }
         });
-        connection.query('SELECT ID, NAME FROM USERS WHERE EMAIL=\'' + params[1] + '\';', (err, rows, fields) => {
+        connection.query("SELECT ID, NAME FROM USERS WHERE EMAIL=\"" + params[1] + "\";", (err, rows, fields) => {
             if (err) {
                 console.log(err);
                 return;
