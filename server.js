@@ -10,11 +10,9 @@ const bodyParser = require("body-parser");
 const utf8 = require("utf8");
 const base64 = require("base-64");
 
-process.env.JAWSDB_URL = "mysql://vp7576quty8bgs0a:k9w4gtwjo0sh4jsn@cig4l2op6r0fxymw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/unhl405k407wjdze";
 
 // Connection URL
-const DBurl = "mongodb://nutrition:2QH3TtBYA3Y5pBIA@cluster0-shard-00-00-oxsv4.mongodb.net:27017,cluster0-shard-00-01-oxsv4.mongodb.net:27017,cluster0-shard-00-02-oxsv4.mongodb.net:27017/nutrition?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
-
+const DBurl = process.env.MONGODB_URI;
 
 //Uses static directory "public"
 //app.use(express.static("public"));
