@@ -251,7 +251,7 @@ app.get("/API/signin/:userData", (req, res) => {
     let decoded = base64.decode(encoded);
     let params = utf8.decode(decoded).split(";;;");
 
-    var connection = mysql.createConnection(process.env.JAWSDB_URL);
+    let connection = mysql.createConnection(process.env.JAWSDB_URL);
     connection.connect();
     try {
         connection.query('INSERT INTO USERS (NAME, EMAIL, PASSWORD) ' +
