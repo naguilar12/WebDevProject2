@@ -20,6 +20,12 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
+//En general el proyecto esta bien documentado
+//de todas formas me gustaria que se indicara propiedades 
+//se esperan recibir cuando se hace uso del req.body
+
+//Y creo que podría ser conveniente en cuanto a la mantenibilidad del codigo
+//usar el Router de express y separar los rutas del archivo server.js
 
 //search for a food obj
 app.get("/API/food/:name", function (req, res) {
