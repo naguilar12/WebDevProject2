@@ -113,51 +113,38 @@ export default class NewDayModal extends Component {
     }
 
     render() {
-        let protein, kcals, carbohydrates, fiber, fat;
-        if(this.state.first) {
-             protein = this.props.weight * 2;
-             kcals = this.props.kcals;
-             carbohydrates = this.props.carbohydrates;
-             fiber = this.props.fiber;
-             fat = this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9;
+        if(this.state.first && (this.props.kcals!== this.state.kcals || this.state.protein!==this.props.weight*2) ) {
              this.setState({
                  protein : this.props.weight * 2,
                  kcals : this.props.kcals,
                  carbohydrates : this.props.carbohydrates,
                  fiber : this.props.fiber,
-                 fat : this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9,
-                 first: false
+                 fat : this.props.fat - (this.props.weight * 2 - this.props.protein) * 4 / 9
              })
         }
-        else{
-            protein = this.state.protein;
-            kcals = this.state.kcals;
-            carbohydrates = this.state.carbohydrates;
-            fiber = this.state.fiber;
-            fat = this.state.fat;
-        }
+
 
         let recomendation = <span>We recommend eating about 2.0 grams of protein per kg of weight.</span>;
         if (this.props.weightDifference) {
             if (this.props.weightDifference > 0.5) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight decrease {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {kcals * 0.2 / 4} g of carbohydrates.</span>);
+                if you want to gain weight decrease {this.state.kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {this.state.kcals * 0.2 / 4} g of carbohydrates.</span>);
             }
             else if (this.props.weightDifference > 0.1) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {kcals * 0.1 / 4} g of carbohydrates.</span>);
+                if you want to gain weight increase {this.state.kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight decrease {this.state.kcals * 0.1 / 4} g of carbohydrates.</span>);
             }
             else if (this.props.weightDifference < -0.2) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals * 0.2 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
+                if you want to gain weight increase {this.state.kcals * 0.2 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
             else if (this.props.weightDifference < -0.45) {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals * 0.25 / 4} g of carbohydrates, if you want to lose weight increase {kcals * 0.1 / 4} g of carbohydrates.</span>);
+                if you want to gain weight increase {this.state.kcals * 0.25 / 4} g of carbohydrates, if you want to lose weight increase {this.state.kcals * 0.1 / 4} g of carbohydrates.</span>);
             }
             else {
                 recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
-                if you want to gain weight increase {kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
+                if you want to gain weight increase {this.state.kcals * 0.1 / 4} g of carbohydrates, if you want to lose weight don't change your energy consumption.</span>);
             }
         } else {
             recomendation = (<span>We recommend eating about 2.0 grams of protein per kg of weight.
@@ -186,17 +173,17 @@ export default class NewDayModal extends Component {
                                 </span>
                             </div>
                             <div className="row">
-                                <input className="col-2" value={protein}
+                                <input className="col-2" value={this.state.protein}
                                        onChange={this.handleProteinChange}/>
 
-                                <input className="col-3" value={carbohydrates}
+                                <input className="col-3" value={this.state.carbohydrates}
                                        onChange={this.handleCarbohydratesChange}/>
 
-                                <input className="col-2" value={fat}
+                                <input className="col-2" value={this.state.fat}
                                        onChange={this.handleFatChange}/>
-                                <input className="col-2" value={fiber}
+                                <input className="col-2" value={this.state.fiber}
                                        onChange={this.handleFiberChange}/>
-                                <input className="col-3" value={kcals} onChange={this.handleKcalsChange}/>
+                                <input className="col-3" value={this.state.kcals} onChange={this.handleKcalsChange}/>
                             </div>
                             <div className="row">
                                 <div className="col-2">g
