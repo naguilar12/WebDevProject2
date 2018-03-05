@@ -49,6 +49,8 @@ export default class NewDayModal extends Component {
                 return {
                     kcals: val,
                     fiber: val / 1000 * 15,
+                    carbohydrates: prevState.carbohydrates + (val-prevState.kcals)*2/(4*3),
+                    fat: prevState.fat + (val-prevState.kcals)*1/(9*3),
                     first: false
                 }
             });
